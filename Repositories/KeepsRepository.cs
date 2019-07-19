@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.Data;
+using Dapper;
 using keepr.Models;
 
 namespace keepr.Repositories
@@ -13,29 +15,56 @@ namespace keepr.Repositories
       _db = db;
     }
 
-    internal object GetAll()
+    public IEnumerable<Keep> GetAll()
     {
-      throw new NotImplementedException();
+      return _db.Query<Keep>("SELECT * FROM keeps");
     }
 
-    internal object GetById(int id)
+    public Keep GetById(int id)
     {
-      throw new NotImplementedException();
+      string query = "SELECT * FROM keeps WHERE id = @Id";
+      Keep data = _db.QueryFirstOrDefault<Keep>(query, new { id });
+      if (data == null) throw new Exception("Invalid Id");
+      return data;
     }
 
-    internal object Create(Keep value)
+    public Keep Create(Keep value)
     {
-      throw new NotImplementedException();
+      string query = @"
+      INSERT INTO keeps (name, description, userId, image, private, views, shares, keeps) 
+      VALUES (@Name, @Description, @UserId, @Image, @Private, @Views, @Shares, @Keeps);
+      SELECT LAST_INSERT_ID();      
+      ";
+      int id = _db.ExecuteScalar<int>(query, value);
+      value.Id = id;
+      return value;
     }
 
-    internal object Update(Keep value)
+    public Keep Update(Keep value)
     {
-      throw new NotImplementedException();
+      string query = @"
+      UPDATE keeps
+      SET
+        name = @Name,
+        description = @Description,
+        userId = @UserId,
+        image = @Image,
+        private = @Private,
+        views = @Views,
+        shares = @Shares,
+        keeps = @Keeps
+      WHERE id = @Id;
+      SELECT * FROM keeps WHERE id = @Id;
+      ";
+      return _db.QueryFirstOrDefault<Keep>(query, value);
     }
 
-    internal object Delete(int id)
+    public string Delete(int id)
     {
-      throw new NotImplementedException();
+      string query = "DELETE FROM keeps WHERE id =@Id";
+      int rowAffected = _db.Execute(query, new { id });
+      if (rowAffected < 1) throw new Exception("Invalid Id");
+      return "Successfully Deleted Keep";
     }
   }
 }

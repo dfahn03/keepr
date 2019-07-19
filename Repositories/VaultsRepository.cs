@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.Data;
+using Dapper;
 using keepr.Models;
 
 namespace keepr.Repositories
@@ -13,29 +15,51 @@ namespace keepr.Repositories
       _db = db;
     }
 
-    internal object GetAll()
+    public IEnumerable<Vault> GetAll()
     {
-      throw new NotImplementedException();
+      return _db.Query<Vault>("SELECT * FROM vaults");
     }
 
-    internal object GetById(int id)
+    public Vault GetById(int id)
     {
-      throw new NotImplementedException();
+      string query = "SELECT * FROM vaults WHERE id = @Id";
+      Vault data = _db.QueryFirstOrDefault<Vault>(query, new { id });
+      if (data == null) throw new Exception("Invalid Id");
+      return data;
     }
 
-    internal object Create(Vault value)
+    public Vault Create(Vault value)
     {
-      throw new NotImplementedException();
+      string query = @"
+      INSERT INTO vaults (name, description, userId) 
+      VALUES (@Name, @Description, @UserId);
+      SELECT LAST_INSERT_ID();      
+      ";
+      int id = _db.ExecuteScalar<int>(query, value);
+      value.Id = id;
+      return value;
     }
 
-    internal object Update(Vault value)
+    public Vault Update(Vault value)
     {
-      throw new NotImplementedException();
+      string query = @"
+      UPDATE vaults
+      SET
+        name = @Name,
+        description = @Description,
+        userId = @UserId
+      WHERE id = @Id;
+      SELECT * FROM vaults WHERE id = @Id;
+      ";
+      return _db.QueryFirstOrDefault<Vault>(query, value);
     }
 
-    internal object Delete(int id)
+    public string Delete(int id)
     {
-      throw new NotImplementedException();
+      string query = "DELETE FROM vaults WHERE id =@Id";
+      int rowAffected = _db.Execute(query, new { id });
+      if (rowAffected < 1) throw new Exception("Invalid Id");
+      return "Successfully Deleted Vault";
     }
   }
 }
