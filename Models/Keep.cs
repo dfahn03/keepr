@@ -20,7 +20,7 @@ namespace keepr.Models
     public string Image { get; set; }
 
     [Required]
-    public bool Private { get; set; }
+    public bool IsPrivate { get; set; }
 
     public int Views { get; set; }
 
