@@ -16,7 +16,7 @@ namespace keepr.Repositories
       _db = db;
     }
 
-    public IEnumerable<Keep> GetAll()
+    public IEnumerable<Keep> GetAllPublicKeeps()
     {
       return _db.Query<Keep>("SELECT * FROM keeps");
     }
@@ -29,10 +29,18 @@ namespace keepr.Repositories
       return data;
     }
 
+    public Keep GetKeepsByUser(string userId)
+    {
+      string query = "SELECT * FROM keeps WHERE userId = @UserId";
+      Keep data = _db.QueryFirstOrDefault<Keep>(query, new { userId });
+      if (data == null) throw new Exception("Invalid Id");
+      return data;
+    }
+
     public Keep Create(Keep value)
     {
       string query = @"
-      INSERT INTO keeps (name, description, image, isPrivate) VALUES (@Name, @Description, @Image, @IsPrivate);
+      INSERT INTO keeps (name, description, userId, img, isPrivate) VALUES (@Name, @Description, @UserId, @Image, @IsPrivate);
       SELECT LAST_INSERT_ID();
       ";
       int id = _db.ExecuteScalar<int>(query, value);

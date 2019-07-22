@@ -22,11 +22,11 @@ namespace keepr.Controllers
     //api/keeps
     [Authorize]
     [HttpGet]
-    public ActionResult<IEnumerable<Keep>> GetAll()
+    public ActionResult<IEnumerable<Keep>> GetAllPublicKeeps()
     {
       try
       {
-        return Ok(_repo.GetAll());
+        return Ok(_repo.GetAllPublicKeeps());
       }
       catch (Exception e)
       {
@@ -42,6 +42,23 @@ namespace keepr.Controllers
       try
       {
         return Ok(_repo.GetById(id));
+      }
+      catch (Exception e)
+      {
+        return BadRequest(e);
+      }
+    }
+
+    //api/keeps/user
+    [Authorize]
+    [HttpGet("{user}")]
+    public ActionResult<Keep> GetKeepsByUser(string userId)
+    {
+      try
+      {
+        // var uid = HttpContext.User.FindFirstValue("Id");
+        // userId = uid;
+        return Ok(_repo.GetKeepsByUser(userId));
       }
       catch (Exception e)
       {
@@ -73,6 +90,8 @@ namespace keepr.Controllers
     {
       try
       {
+        var uid = HttpContext.User.FindFirstValue("Id");
+        value.UserId = uid;
         value.Id = id;
         return Ok(_repo.Update(value));
       }
