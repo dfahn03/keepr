@@ -21,12 +21,13 @@ namespace keepr.Repositories
       return _db.Query<Keep>("SELECT * FROM keeps WHERE isPrivate = 'false'");
     }
 
-    public Keep GetKeepsByUser(string id)
+    public IEnumerable<Keep> GetKeepsByUser(string userId)
     {
-      string query = "SELECT * FROM keeps WHERE userId = @UserId";
-      Keep data = _db.QueryFirstOrDefault<Keep>(query, new { id });
-      if (data == null) throw new Exception("Invalid Id");
-      return data;
+      var UserId = userId;
+      return _db.Query<Keep>("SELECT * FROM keeps WHERE userId = UserId");
+      // Keep data = _db.QueryFirstOrDefault<Keep>(query, new { userId });
+      // if (data == null) throw new Exception("Invalid Id");
+      // return data;
     }
 
     public Keep GetById(int id)
@@ -56,8 +57,8 @@ namespace keepr.Repositories
         name = @Name,
         description = @Description,
         userId = @UserId,
-        image = @Image,
-        private = @Private,
+        img = @Image,
+        isPrivate = @IsPrivate,
         views = @Views,
         shares = @Shares,
         keeps = @Keeps

@@ -36,14 +36,14 @@ namespace keepr.Controllers
 
     //api/keeps/user
     [Authorize]
-    [HttpGet("{id}")]
-    public ActionResult<Keep> GetKeepsByUser(string id)
+    [HttpGet("user")]
+    public ActionResult<Keep> GetKeepsByUser(string userId)
     {
       try
       {
         var uid = HttpContext.User.FindFirstValue("Id");
-        id = uid;
-        return Ok(_repo.GetKeepsByUser(id));
+        userId = uid;
+        return Ok(_repo.GetKeepsByUser(userId));
       }
       catch (Exception e)
       {
