@@ -34,21 +34,6 @@ namespace keepr.Controllers
       }
     }
 
-    //api/keeps/:id
-    [Authorize]
-    [HttpGet("{id}")]
-    public ActionResult<Keep> GetById(int id)
-    {
-      try
-      {
-        return Ok(_repo.GetById(id));
-      }
-      catch (Exception e)
-      {
-        return BadRequest(e);
-      }
-    }
-
     //api/keeps/user
     [Authorize]
     [HttpGet("{id}")]
@@ -65,6 +50,23 @@ namespace keepr.Controllers
         return BadRequest(e);
       }
     }
+
+
+    //api/keeps/:id
+    [Authorize]
+    [HttpGet("{id}")]
+    public ActionResult<Keep> GetById(int id)
+    {
+      try
+      {
+        return Ok(_repo.GetById(id));
+      }
+      catch (Exception e)
+      {
+        return BadRequest(e);
+      }
+    }
+
 
     //api/keeps
     [Authorize]

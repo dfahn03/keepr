@@ -21,17 +21,17 @@ namespace keepr.Repositories
       return _db.Query<Keep>("SELECT * FROM keeps WHERE isPrivate = 'false'");
     }
 
-    public Keep GetById(int id)
+    public Keep GetKeepsByUser(string id)
     {
-      string query = "SELECT * FROM keeps WHERE id = @id";
+      string query = "SELECT * FROM keeps WHERE userId = @UserId";
       Keep data = _db.QueryFirstOrDefault<Keep>(query, new { id });
       if (data == null) throw new Exception("Invalid Id");
       return data;
     }
 
-    public Keep GetKeepsByUser(string id)
+    public Keep GetById(int id)
     {
-      string query = "SELECT * FROM keeps WHERE userId = @id";
+      string query = "SELECT * FROM keeps WHERE id = @Id";
       Keep data = _db.QueryFirstOrDefault<Keep>(query, new { id });
       if (data == null) throw new Exception("Invalid Id");
       return data;
