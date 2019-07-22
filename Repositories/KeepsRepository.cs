@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using Dapper;
 using keepr.Models;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 
 namespace keepr.Repositories
 {
@@ -31,11 +31,9 @@ namespace keepr.Repositories
 
     public Keep Create(Keep value)
     {
-      // Keep UserId = HttpContext.User.FindFirstValue("Id");
       string query = @"
-      INSERT INTO keeps (name, description, userId, image, isprivate) 
-      VALUES (@Name, @Description, @UserId, @Image, @IsPrivate);
-      SELECT LAST_INSERT_ID();      
+      INSERT INTO keeps (name, description, image, isPrivate) VALUES (@Name, @Description, @Image, @IsPrivate);
+      SELECT LAST_INSERT_ID();
       ";
       int id = _db.ExecuteScalar<int>(query, value);
       value.Id = id;

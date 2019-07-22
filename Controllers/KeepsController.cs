@@ -56,7 +56,8 @@ namespace keepr.Controllers
     {
       try
       {
-        // value.UserId = HttpContext.User.FindFirstValue("Id");
+        var uid = HttpContext.User.FindFirstValue("Id");
+        value.UserId = uid;
         return Ok(_repo.Create(value));
       }
       catch (Exception e)
