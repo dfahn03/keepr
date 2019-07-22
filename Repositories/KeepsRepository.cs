@@ -25,9 +25,6 @@ namespace keepr.Repositories
     {
       var UserId = userId;
       return _db.Query<Keep>("SELECT * FROM keeps WHERE userId = UserId");
-      // Keep data = _db.QueryFirstOrDefault<Keep>(query, new { userId });
-      // if (data == null) throw new Exception("Invalid Id");
-      // return data;
     }
 
     public Keep GetById(int id)

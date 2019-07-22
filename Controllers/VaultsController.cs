@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Security.Claims;
 using keepr.Models;
 using keepr.Repositories;
 using Microsoft.AspNetCore.Authorization;
@@ -18,14 +19,31 @@ namespace keepr.Controllers
       _repo = repo;
     }
 
+    // //api/vaults
+    // [Authorize]
+    // [HttpGet]
+    // public ActionResult<IEnumerable<Vault>> GetAll()
+    // {
+    //   try
+    //   {
+    //     return Ok(_repo.GetAll());
+    //   }
+    //   catch (Exception e)
+    //   {
+    //     return BadRequest(e);
+    //   }
+    // }
+
     //api/vaults
     [Authorize]
     [HttpGet]
-    public ActionResult<IEnumerable<Vault>> GetAll()
+    public ActionResult<Vault> GetVaultsByUser(string userId)
     {
       try
       {
-        return Ok(_repo.GetAll());
+        var uid = HttpContext.User.FindFirstValue("Id");
+        userId = uid;
+        return Ok(_repo.GetVaultsByUser(userId));
       }
       catch (Exception e)
       {
@@ -55,6 +73,8 @@ namespace keepr.Controllers
     {
       try
       {
+        var uid = HttpContext.User.FindFirstValue("Id");
+        value.UserId = uid;
         return Ok(_repo.Create(value));
       }
       catch (Exception e)
@@ -70,6 +90,8 @@ namespace keepr.Controllers
     {
       try
       {
+        var uid = HttpContext.User.FindFirstValue("Id");
+        value.UserId = uid;
         value.Id = id;
         return Ok(_repo.Update(value));
       }
