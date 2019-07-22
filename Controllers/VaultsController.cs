@@ -115,5 +115,59 @@ namespace keepr.Controllers
         return BadRequest(e);
       }
     }
+
+
+
+
+    //api/vaults/:id/keeps
+    [Authorize]
+    [HttpPost("{id}/keeps")]
+    public ActionResult<String> AddKeepToVault(int id, [FromBody] VaultKeeps vaultKeeps)
+    {
+      try
+      {
+        var uid = HttpContext.User.FindFirstValue("Id");
+        vaultKeeps.UserId = uid;
+        vaultKeeps.VaultId = id;
+        return Ok(_repo.AddKeepToVault(vaultKeeps));
+      }
+      catch (Exception e)
+      {
+        return BadRequest(e);
+      }
+    }
+
+    //api/vaults/:id/keeps
+    [Authorize]
+    [HttpGet("{id}/keeps")]
+    public ActionResult<IEnumerable<Keep>> GetKeepsByVaultId(int id)
+    {
+      try
+      {
+        return Ok(_repo.GetKeepsByVaultId(id));
+      }
+      catch (Exception e)
+      {
+        return BadRequest(e);
+      }
+    }
+
+    //api/vaults/:id/keeps
+    [Authorize]
+    [HttpPut("{id}/keeps")]
+    public ActionResult<string> DeleteVaultKeep(int id, [FromBody] VaultKeeps value)
+    {
+      try
+      {
+        var uid = HttpContext.User.FindFirstValue("Id");
+        value.UserId = uid;
+        value.Id = id;
+        return Ok(_repo.DeleteVaultKeep(value));
+      }
+      catch (Exception e)
+      {
+        return BadRequest(e);
+      }
+    }
   }
 }

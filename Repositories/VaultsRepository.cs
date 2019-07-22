@@ -67,5 +67,39 @@ namespace keepr.Repositories
       if (rowAffected < 1) throw new Exception("Invalid Id");
       return "Successfully Deleted Vault";
     }
+
+    public string AddKeepToVault(VaultKeeps vk)
+    {
+      var userId = vk.UserId;
+      string query = @"
+      INSERT INTO vaultkeeps (vaultId, keepId, userId) 
+      VALUES (@VaultId, @KeepId, @UserId);
+      SELECT LAST_INSERT_ID();      
+      ";
+      int rowsAffected = _db.Execute(query, vk);
+      if (rowsAffected < 1) throw new Exception("Invalid Ids");
+      return "Successfully add Keep to Vault";
+      // int id = _db.ExecuteScalar<int>(query, value);
+      // value.Id = id;
+      // return value;
+    }
+
+    public IEnumerable<Keep> GetKeepsByVaultId(int id)
+    {
+      string query = @"
+      SELECT *FROM vaultkeeps vk
+      INNER JOIN keeps k ON k.id = vk.keepId
+      WHERE vaultId = @id
+      ";
+      return _db.Query<Keep>(query, new { id });
+    }
+
+    public string DeleteVaultKeep(VaultKeeps value)
+    {
+      string query = @"DELETE FROM vaultkeeps WHERE vaultId = @VaultId AND keepId = @KeepId AND userId = @UserId;";
+      int rowsAffected = _db.Execute(query, value);
+      if (rowsAffected < 1) throw new Exception("Invalid Ids");
+      return "Successfully Deleted VaultKeep";
+    }
   }
 }
