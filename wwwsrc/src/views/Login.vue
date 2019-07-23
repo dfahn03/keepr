@@ -117,7 +117,7 @@
                 $(".modal-backdrop").remove();
             },
             guestPreview() {
-                this.$router.push("Home");
+                this.$router.push({ name: "Home" });
                 // this.$router.push("GuestHome");
             }
         }
