@@ -28,11 +28,12 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    //#region -- Auth --
     async register({ commit, dispatch }, creds) {
       try {
         let user = await AuthService.Register(creds)
         commit('setUser', user)
-        router.push({ name: "home" })
+        router.push({ name: "Home" })
       } catch (e) {
         console.warn(e.message)
       }
@@ -41,7 +42,7 @@ export default new Vuex.Store({
       try {
         let user = await AuthService.Login(creds)
         commit('setUser', user)
-        router.push({ name: "home" })
+        router.push({ name: "Home" })
       } catch (e) {
         console.warn(e.message)
       }
@@ -56,5 +57,10 @@ export default new Vuex.Store({
         console.warn(e.message)
       }
     }
+    //#endregion
+
+    //#region --  --
+
+    //#endregion
   }
 })
