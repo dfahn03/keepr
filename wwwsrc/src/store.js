@@ -33,7 +33,7 @@ export default new Vuex.Store({
       try {
         let user = await AuthService.Register(creds)
         commit('setUser', user)
-        router.push({ name: "Home" })
+        router.push({ name: "Login" })
       } catch (e) {
         console.warn(e.message)
       }
@@ -52,7 +52,7 @@ export default new Vuex.Store({
         let success = await AuthService.Logout()
         if (!success) { }
         commit('resetState')
-        router.push({ name: "login" })
+        router.push({ name: "Login" })
       } catch (e) {
         console.warn(e.message)
       }

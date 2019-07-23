@@ -2,20 +2,21 @@
     <div class="row login d-flex justify-content-center align-content-center">
         <div class="card login-card text-center" style="width: 30rem;">
             <div class="card-body">
-                <h1 class="card-title">Welcome to Keepr!</h1>
-                <h3 class="card-text">The greatest site to upload, save and see the best Keeps on the web!</h3>
+                <h1 class="card-title">Welcome to KeepSake!</h1>
+                <h3 class="card-text">The greatest site to upload, save and see Keeps on the web!</h3>
                 <button type="button" class="btn btn-dark btn-sm mt-3 regBtn" data-toggle="modal"
                     data-target="#registerModal" title="Register">Register</button>
                 <button type="button" class="btn btn-dark btn-sm ml-1 mt-3 logBtn" data-toggle="modal"
                     data-target="#loginModal" title="Login">Login</button>
-                <button type="button" class="btn btn-secondary btn-sm ml-1 mt-3 guestBtn" @click=""
+                <button type="button" class="btn btn-secondary btn-sm ml-1 mt-3 guestBtn" @click="guestPreview"
                     title="Preview Site">Guest</button>
+                <!-- TODO Link to guest home view so they can view public keeps or just use one home and set restrictions if logged in or not -->
             </div>
         </div>
 
         <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel"
             aria-hidden="true">
-            <div class="modal-dialog" role="document">
+            <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="registerModalLabel">Register</h5>
@@ -51,7 +52,7 @@
 
         <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
             aria-hidden="true">
-            <div class="modal-dialog" role="document">
+            <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="loginModalLabel">Login</h5>
@@ -88,7 +89,6 @@
         name: "Login",
         data() {
             return {
-                // loginForm: true,
                 creds: {
                     email: "",
                     password: ""
@@ -115,6 +115,10 @@
                 this.$store.dispatch("login", this.creds);
                 $("#loginModal").modal("hide");
                 $(".modal-backdrop").remove();
+            },
+            guestPreview() {
+                this.$router.push("Home");
+                // this.$router.push("GuestHome");
             }
         }
     };
