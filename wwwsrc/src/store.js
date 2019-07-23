@@ -49,28 +49,23 @@ export default new Vuex.Store({
         let user = await AuthService.Register(creds)
         commit('setUser', user)
         router.push({ name: "Login" })
-      } catch (e) {
-        console.warn(e.message)
-      }
+      } catch (e) { console.warn(e.message) }
     },
     async login({ commit, dispatch }, creds) {
       try {
         let user = await AuthService.Login(creds)
         commit('setUser', user)
         router.push({ name: "Home" })
-      } catch (e) {
-        console.warn(e.message)
-      }
+      } catch (e) { console.warn(e.message) }
     },
     async logout({ commit, dispatch }) {
       try {
         let success = await AuthService.Logout()
-        if (!success) { }
+        // if (!success) { }
         commit('resetState')
         router.push({ name: "Login" })
-      } catch (e) {
-        console.warn(e.message)
-      }
+        window.location.reload()
+      } catch (e) { console.warn(e.message) }
     },
     //#endregion
 
@@ -78,6 +73,12 @@ export default new Vuex.Store({
     async getPublicKeeps({ commit, dispatch }) {
       try {
         let res = await api.get('keeps')
+        commit('setKeeps', res.data)
+      } catch (err) { console.error(err) }
+    },
+    async getUserKeeps({ commit, dispatch }) {
+      try {
+        let res = await api.get('keeps/user')
         commit('setKeeps', res.data)
       } catch (err) { console.error(err) }
     },

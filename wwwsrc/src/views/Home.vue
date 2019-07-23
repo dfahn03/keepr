@@ -1,6 +1,6 @@
 <template>
   <div class="row home">
-    <div class="col-12 nbar p-0">
+    <div class="col-12 container-fluid nbar p-0">
       <nav class="navbar navbar-dark p-1">
         <a class="navbar-brand" href="#">
           <img src="../assets/K-2.jpg" width="60" height="60" class="d-inline-block align-top" alt="">
@@ -8,11 +8,8 @@
         </a>
         <h1 v-if="user.id" class="home-title mt-2">Welcome {{user.username}}</h1>
         <div class="dropdown dropleft">
-          <!-- <button class="btn dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false"> -->
           <img src="../assets/Menu-Icon-40.png" alt="" title="Dropdown Menu" class="btn dropdown-toggle menuBtn"
             id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <!-- </button> -->
           <div v-if="user.id" class="dropdown-menu" aria-labelledby="dropdownMenu2">
             <button class="dropdown-item" type="button" @click="logout">Logout</button>
             <button class="dropdown-item" type="button" @click="">Dashboard</button>
@@ -21,18 +18,19 @@
             <button class="dropdown-item" type="button" @click="pushToLogin">Login</button>
           </div>
         </div>
-        <!-- <button v-if="user.id" @click="logout" class="btn btn-sm btn-danger">Logout</button> -->
-        <!-- <router-link v-else :to="{name: 'Login'}"><button type="button" class="btn btn-sm btn-success">Login</button>
-        </router-link> -->
       </nav>
     </div>
 
-    <div class="col-3" v-for="keep in keeps" :key="keep._id">
-      <div class="card" style="width: 18rem;">
-        <img :src="{{keep.img}}" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">{{keep.name}}</h5>
-          <p class="card-text">{{keep.description}}</p>
+    <div class="col-12 mt-4">
+      <div class="row">
+        <div class="col-4" v-for="keep in keeps" :key="keep.id">
+          <div class="card" style="width: 15rem;">
+            <img :src="keep.img" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">{{keep.name}}</h5>
+              <p class="card-text">{{keep.description}}</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -43,7 +41,10 @@
   export default {
     name: "Home",
     mounted() {
-      this.$store.dispatch('getPublicKeeps')
+      // this.$store.dispatch('getPublicKeeps');
+      if (this.user.id) {
+        this.$store.dispatch('getUserKeeps');
+      }
     },
     computed: {
       user() {
