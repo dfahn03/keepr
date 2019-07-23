@@ -1,5 +1,5 @@
-USE dakeepr;
-SELECT * FROM keeps;
+-- USE dakeepr;
+-- DROP TABLE users;
 -- DELETE FROM keeps;
 -- CREATE TABLE users (
 --     id VARCHAR(255) NOT NULL,

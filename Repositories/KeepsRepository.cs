@@ -38,7 +38,7 @@ namespace keepr.Repositories
     public Keep Create(Keep value)
     {
       string query = @"
-      INSERT INTO keeps (name, description, userId, img, isPrivate) VALUES (@Name, @Description, @UserId, @Image, @IsPrivate);
+      INSERT INTO keeps (name, description, userId, img, isPrivate) VALUES (@Name, @Description, @UserId, @Img, @IsPrivate);
       SELECT LAST_INSERT_ID();
       ";
       int id = _db.ExecuteScalar<int>(query, value);
@@ -54,7 +54,7 @@ namespace keepr.Repositories
         name = @Name,
         description = @Description,
         userId = @UserId,
-        img = @Image,
+        img = @Img,
         isPrivate = @IsPrivate,
         views = @Views,
         shares = @Shares,

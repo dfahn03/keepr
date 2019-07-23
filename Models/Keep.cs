@@ -16,7 +16,7 @@ namespace keepr.Models
 
     // public int VaultId { get; set; }
     [Url]
-    public string Image { get; set; }
+    public string Img { get; set; }
 
     [Required]
     public bool IsPrivate { get; set; }
