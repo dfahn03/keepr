@@ -64,7 +64,7 @@ export default new Vuex.Store({
         // if (!success) { }
         commit('resetState')
         router.push({ name: "Login" })
-        window.location.reload()
+        // window.location.reload()
       } catch (e) { console.warn(e.message) }
     },
     //#endregion
@@ -81,6 +81,13 @@ export default new Vuex.Store({
         let res = await api.get('keeps/user')
         commit('setKeeps', res.data)
         console.log(res)
+      } catch (err) { console.error(err) }
+    },
+    async deleteKeep({ commit, dispatch }, keepId) {
+      try {
+        await api.delete('keeps/' + keepId)
+        dispatch('getPublicKeeps')
+        dispatch('getUserKeeps')
       } catch (err) { console.error(err) }
     },
     //#endregion

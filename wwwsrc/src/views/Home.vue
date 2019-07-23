@@ -5,7 +5,7 @@
         <img src="../assets/K-2.jpg" width="60" height="60" class="d-inline-block align-top" alt="">
         <h4 class="float-right mt-2 ml-1 site-title">KeepSake</h4>
       </a>
-      <h1 v-if="user.id" class="home-title">Welcome {{user.username}}</h1>
+      <h1 v-if="user.id" class="home-title mt-2">Welcome {{user.username}}</h1>
       <form class="form-inline my-2 my-lg-0" @submit.prevent="">
         <input class="form-control mr-sm-2 text-center" type="search" placeholder="Search" aria-label="Search">
         <button class="btn searchBtn my-2 my-sm-0" type="submit">Search</button>
@@ -34,8 +34,27 @@
           <div class="card-body">
             <h5 class="card-title">{{keep.name}}</h5>
             <p class="card-text">{{keep.description}}</p>
-            <img v-if="user.id == keep.userId && keep.isPrivate == true" src="../assets/Trash-Icon-26.png" alt=""
-              title="Delete Your Keep" class="delKBtn" @click="deleteYourKeep">
+            <div class="row justify-content-center">
+              <div class="col-2 dropdown mr-1">
+                <img src="../assets/Add-Icon-Green-30.png" alt="" title="Add to Vault"
+                  class="btn dropdown-toggle vaultDropBtn" id="dropdownMenu2" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
+                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                  <button class="dropdown-item" type="button" v-for="vault in vaults" :key="vault.id"
+                    @click="">{{vault.name}}</button>
+                </div>
+              </div>
+              <div class="col-2">
+                <img src="../assets/Share-Icon-30.png" alt="" title="Share Keep" class="shareKBtn ml-2" @click="">
+              </div>
+              <div class="col-2">
+                <img v-if="user.id == keep.userId && keep.isPrivate == true" src="../assets/Trash-Icon-26.png" alt=""
+                  title="Delete Keep" class="delKBtn ml-2" @click="deleteKeep(keep.id)">
+              </div>
+            </div>
+
+
+            <!-- <img src="../assets/Add-Icon-Green-30.png" alt="" title="Save Keep to Vault" class="saveKBtn" @click=""> -->
 
           </div>
         </div>
@@ -58,11 +77,11 @@
       user() {
         return this.$store.state.user;
       },
-      publicKeeps() {
-        this.$store.dispatch('getPublicKeeps')
-      },
       keeps() {
         return this.$store.state.keeps;
+      },
+      vaults() {
+        return this.$store.state.vaults;
       }
     },
     methods: {
@@ -75,7 +94,8 @@
       pushToDashboard() {
         this.$router.push({ name: 'Dashboard' })
       },
-      deleteYourKeep() {
+      deleteKeep(keepId) {
+        this.$store.dispatch('deleteKeep', keepId);
       }
     }
   };
@@ -110,16 +130,17 @@
   .home-title {
     font-family: 'Acme', sans-serif;
     color: rgb(0, 174, 255);
-    margin-left: 30rem;
+    /* margin-left: 30rem; */
   }
 
   .menuBtn {
     cursor: pointer;
   }
 
-  form {
+  /* form {
     margin-left: 15rem;
-  }
+    justify-content: flex-end;
+  } */
 
   .searchBtn {
     color: rgb(0, 174, 255);
@@ -127,6 +148,16 @@
   }
 
   .delKBtn {
+    margin-top: 6px;
     cursor: pointer;
   }
+
+  .shareKBtn {
+    margin-top: 5px;
+    cursor: pointer;
+  }
+
+  /* .vaultDropKBtn {
+    cursor: pointer;
+  } */
 </style>
