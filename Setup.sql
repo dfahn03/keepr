@@ -1,4 +1,6 @@
--- USE dakeepr;
+USE dakeepr;
+SELECT * FROM keeps;
+-- DELETE FROM keeps;
 -- CREATE TABLE users (
 --     id VARCHAR(255) NOT NULL,
 --     username VARCHAR(20) NOT NULL,

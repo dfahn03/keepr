@@ -28,7 +28,7 @@
                         <form @submit.prevent="register">
                             <div class="form-group">
                                 <label for="registerInputUsername" class="col-form-label">Username:</label>
-                                <input type="text" v-modle="newUser.username" class="form-control text-center"
+                                <input type="text" v-model="newUser.username" class="form-control text-center"
                                     id="registerInputUsername" placeholder="Enter Username">
                             </div>
                             <div class="form-group">

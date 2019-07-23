@@ -80,6 +80,7 @@ export default new Vuex.Store({
       try {
         let res = await api.get('keeps/user')
         commit('setKeeps', res.data)
+        console.log(res)
       } catch (err) { console.error(err) }
     },
     //#endregion

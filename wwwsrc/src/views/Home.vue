@@ -25,7 +25,7 @@
       <div class="row">
         <div class="col-4" v-for="keep in keeps" :key="keep.id">
           <div class="card" style="width: 15rem;">
-            <img :src="keep.img" class="card-img-top" alt="...">
+            <img :src="keep.img" class="card-img-top" alt="">
             <div class="card-body">
               <h5 class="card-title">{{keep.name}}</h5>
               <p class="card-text">{{keep.description}}</p>
@@ -41,7 +41,7 @@
   export default {
     name: "Home",
     mounted() {
-      // this.$store.dispatch('getPublicKeeps');
+      this.$store.dispatch('getPublicKeeps');
       if (this.user.id) {
         this.$store.dispatch('getUserKeeps');
       }
@@ -50,9 +50,9 @@
       user() {
         return this.$store.state.user;
       },
-      // publicKeeps() {
-      //     this.$store.dispatch('getPublicKeeps')
-      // },
+      publicKeeps() {
+        this.$store.dispatch('getPublicKeeps')
+      },
       keeps() {
         return this.$store.state.keeps;
       }
