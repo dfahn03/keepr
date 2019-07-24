@@ -22,13 +22,13 @@
             <form @submit.prevent="createVault">
               <div class="form-group">
                 <label for="vaultInputName" class="col-form-label">Name:</label>
-                <input type="text" v-model="name" class="form-control text-center" id="vaultInputName"
+                <input type="text" v-model="newVault.name" class="form-control text-center" id="vaultInputName"
                   placeholder="Enter Vault Name">
               </div>
               <div class="form-group">
                 <label for="vaultInputDescription" class="col-form-label">Description:</label>
-                <input type="text" v-model="description" class="form-control text-center" id="vaultInputDescription"
-                  placeholder="Enter Vault Description"></input>
+                <input type="text" v-model="newVault.description" class="form-control text-center"
+                  id="vaultInputDescription" placeholder="Enter Vault Description"></input>
               </div>
               <div class="modal-footer justify-content-center">
                 <button type="submit" class="btn btn-success">Create Vault</button>
@@ -49,30 +49,19 @@
     props: [],
     data() {
       return {
-        name: "",
-        description: ""
-        // userId: this.user.id || ""
+        newVault: {
+          name: "",
+          description: ""
+        }
       }
     },
-    computed: {
-      user() {
-        return this.$store.state.user
-      },
-      vaults() {
-        return this.$store.state.vaults
-      }
-    },
+    computed: {},
     methods: {
       createVault() {
-        let newVault = {
-          name = this.name,
-          description = this.description
-          // userId = this.user.id
-        }
-        this.$store.dispatch('createVault', newVault)
+        this.$store.dispatch('createVault', this.newVault)
         setTimeout(() => {
-          this.name = ""
-          this.description = ""
+          this.newVault.name = ""
+          this.newVault.description = ""
         }, 1000);
         $("#createVaultModal").modal("hide");
         $(".modal-backdrop").remove();

@@ -37,19 +37,20 @@
     </div>
 
 
-    <!-- <div class="container-fluid">
+    <div class="container-fluid">
       <div class="row justify-content-center">
-        <div class="card v-card" style="width: 18rem;">
+        <div class="card v-card" style="width: 18rem;" v-if="vault.userId == user.id" v-for="vault in vaults"
+          :key="vault.id">
           <img src="" class="" alt="">
           <div class="card-body">
             <h5 class="card-title">{{vault.name}}</h5>
-            <p class="card-text">
-            </p>
-            <a href="#" class="btn btn-primary"></a>
+            <p class="card-text">{{vault.description}}</p>
+            <img v-if="vault.userId == user.id" src="../assets/Trash-Icon-26.png" alt="" title="Delete Vault"
+              class="delVBtn ml-2" @click="deleteVault(vault.id)">
           </div>
         </div>
       </div>
-    </div> -->
+    </div>
 
   </div>
 </template>
@@ -83,6 +84,9 @@
           this.$router.push({ name: 'Home' });
         }
       },
+      deleteVault(vaultId) {
+        this.$store.dispatch('deleteVault', vaultId);
+      }
     },
     components: {
       VaultModal,
