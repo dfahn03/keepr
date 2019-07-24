@@ -39,7 +39,7 @@
 
     <div class="container-fluid">
       <div class="row justify-content-center">
-        <div class="card v-card" style="width: 18rem;" v-if="vault.userId == user.id" v-for="vault in vaults"
+        <div class="card v-card ml-3" style="width: 15rem;" v-if="vault.userId == user.id" v-for="vault in vaults"
           :key="vault.id">
           <img src="" class="" alt="">
           <div class="card-body">
@@ -61,6 +61,9 @@
 
   export default {
     name: "Dashboard",
+    mounted() {
+      this.$store.dispatch('getVaults')
+    },
     data() {
       return {}
     },
@@ -141,6 +144,10 @@
   }
 
   .menuBtn {
+    cursor: pointer;
+  }
+
+  .delVBtn {
     cursor: pointer;
   }
 </style>
