@@ -1,12 +1,12 @@
 <template>
   <div class="vault-modal">
-    <div>
+    <!-- <div>
       <button class="v-create" type="button" data-toggle="modal" data-target="#createVaultModal" title="Create Vault">
         <img src="../assets/Add-Icont-BBW-25.png" alt="Add Vault" title="Create a Vault" class="mt-1">
         <h3 class="float-right text-white">Vault</h3>
       </button>
 
-    </div>
+    </div> -->
 
     <div class="modal fade" id="createVaultModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel"
       aria-hidden="true">

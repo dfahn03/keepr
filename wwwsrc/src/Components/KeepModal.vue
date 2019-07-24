@@ -1,11 +1,11 @@
 <template>
   <div class="keep-modal">
-    <div>
+    <!-- <div>
       <button class="v-keep ml-5" type="button" data-toggle="modal" data-target="#createKeepModal" title="Create Keep">
         <img src="../assets/Add-Icont-BBW-25.png" alt="Add Vault" title="Create a Vault" class="mt-1">
         <h3 class="float-right text-white">Keep</h3>
       </button>
-    </div>
+    </div> -->
     <div class="modal fade" id="createKeepModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel"
       aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">

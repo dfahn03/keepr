@@ -21,18 +21,19 @@
 
     <div class="container controls d-flex justify-content-center">
       <div class="row">
-        <vault-modal />
-        <keep-modal />
-        <!-- <button class="v-create" type="button" data-toggle="modal" data-target="#createVaultModal" title="Create Vault">
+        <button class="btn v-create" type="button" data-toggle="modal" data-target="#createVaultModal"
+          title="Create Vault">
           <img src="../assets/Add-Icont-BBW-25.png" alt="Add Vault" title="Create a Vault" class="mt-1">
           <h3 class="float-right text-white">Vault</h3>
-        </button> -->
-        <!-- <button class="v-keep ml-5" type="button" data-toggle="modal" data-target="#createKeepModal"
+        </button>
+        <button class="btn v-keep ml-5" type="button" data-toggle="modal" data-target="#createKeepModal"
           title="Create Keep">
           <img src="../assets/Add-Icont-BBW-25.png" alt="Add Vault" title="Create a Vault" class="mt-1">
           <h3 class="float-right text-white">Keep</h3>
-        </button> -->
+        </button>
       </div>
+      <vault-modal />
+      <keep-modal />
     </div>
 
 
@@ -54,8 +55,8 @@
 </template>
 
 <script>
-  import VaultModal from "@/components/VaultModal.vue"
-  import KeepModal from "@/components/KeepModal.vue"
+  import VaultModal from "@/Components/VaultModal.vue";
+  import KeepModal from "@/Components/KeepModal.vue";
 
   export default {
     name: "Dashboard",
@@ -81,12 +82,6 @@
         if (this.route != 'Home') {
           this.$router.push({ name: 'Home' });
         }
-      },
-      createVault() {
-
-      },
-      createKeep() {
-
       },
     },
     components: {
