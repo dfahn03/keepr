@@ -59,8 +59,18 @@
           <div class="card-body">
             <h5 class="card-title">{{keep.name}}</h5>
             <p class="card-text">{{keep.description}}</p>
-            <img v-if="keep.userId == user.id" src="../assets/Trash-Icon-26.png" alt="" title="Delete Keep"
-              class="delKBtn ml-2" @click="deleteKeep(keep.id)">
+
+            <div class="col-2 dropdown mr-1">
+              <img src="../assets/Add-Icon-Green-30.png" alt="" title="Add to Vault"
+                class="btn dropdown-toggle vaultDropBtn" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
+              <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                <button class="dropdown-item" type="button" v-if="user.id == vaults.userId" v-for="vault in vaults"
+                  :key="vault.id" @click="">{{vault.name}}</button>
+              </div>
+            </div>
+            <img v-if="keep.userId == user.id && keep.isPrivate == true" src="../assets/Trash-Icon-26.png" alt=""
+              title="Delete Keep" class="delKBtn ml-2" @click="deleteKeep(keep.id)">
           </div>
         </div>
       </div>
@@ -164,7 +174,7 @@
       1px -1px 0 #000,
       -1px 1px 0 #000,
       1px 1px 0 #000;
-    margin-right: 7rem;
+    margin-right: 4rem;
   }
 
   .menuBtn {
@@ -172,6 +182,10 @@
   }
 
   .delVBtn {
+    cursor: pointer;
+  }
+
+  .delKBtn {
     cursor: pointer;
   }
 </style>
