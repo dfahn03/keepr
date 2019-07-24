@@ -39,14 +39,28 @@
 
     <div class="container-fluid">
       <div class="row justify-content-center">
-        <div class="card v-card ml-3" style="width: 15rem;" v-if="vault.userId == user.id" v-for="vault in vaults"
+        <div class="card v-card ml-3 mt-3" style="width: 15rem;" v-if="vault.userId == user.id" v-for="vault in vaults"
           :key="vault.id">
-          <img src="" class="" alt="">
           <div class="card-body">
             <h5 class="card-title">{{vault.name}}</h5>
             <p class="card-text">{{vault.description}}</p>
             <img v-if="vault.userId == user.id" src="../assets/Trash-Icon-26.png" alt="" title="Delete Vault"
               class="delVBtn ml-2" @click="deleteVault(vault.id)">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row justify-content-center">
+        <div class="card v-card ml-3 mt-5" style="width: 15rem;" v-if="keep.userId == user.id" v-for="keep in keeps"
+          :key="keep.id">
+          <img :src="keep.img" class="card-img-top" alt="">
+          <div class="card-body">
+            <h5 class="card-title">{{keep.name}}</h5>
+            <p class="card-text">{{keep.description}}</p>
+            <img v-if="keep.userId == user.id" src="../assets/Trash-Icon-26.png" alt="" title="Delete Keep"
+              class="delKBtn ml-2" @click="deleteKeep(keep.id)">
           </div>
         </div>
       </div>
@@ -62,7 +76,11 @@
   export default {
     name: "Dashboard",
     mounted() {
-      this.$store.dispatch('getVaults')
+      this.$store.dispatch('getVaults');
+      // this.$store.dispatch('getPublicKeeps');
+      if (this.user.id) {
+        this.$store.dispatch('getUserKeeps');
+      }
     },
     data() {
       return {}
@@ -73,6 +91,9 @@
       },
       vaults() {
         return this.$store.state.vaults
+      },
+      keeps() {
+        return this.$store.state.keeps
       }
     },
     methods: {
@@ -89,7 +110,10 @@
       },
       deleteVault(vaultId) {
         this.$store.dispatch('deleteVault', vaultId);
-      }
+      },
+      deleteKeep(keepId) {
+        this.$store.dispatch('deleteKeep', keepId);
+      },
     },
     components: {
       VaultModal,
