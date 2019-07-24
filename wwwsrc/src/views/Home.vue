@@ -23,10 +23,6 @@
       </div>
     </nav>
 
-    <div class="container">
-
-    </div>
-
     <div class="container-fluid mt-5">
       <div class="row justify-content-center">
         <div class="card m-3" style="width: 20rem;" v-for="keep in keeps" :key="keep.id">
@@ -121,10 +117,6 @@
     background-size: 100% 100%;
     background-position: center;
   }
-
-  /* .nbar {
-    height: 1vh;
-  } */
 
   .site-title {
     font-family: 'Lobster', cursive;

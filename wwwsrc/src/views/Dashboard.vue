@@ -8,7 +8,7 @@
       </a>
       <h1 v-if="user.id" class="home-title mt-2">{{user.username}}'s Dashboard</h1>
       <div class="dropdown dropleft">
-        <img src="../assets/Menu-Icon-Black-40.png" alt="" title="Dropdown Menu" class="btn dropdown-toggle menuBtn"
+        <img src="../assets/Menu-Icon-40.png" alt="" title="Dropdown Menu" class="btn dropdown-toggle menuBtn"
           id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <div v-if="user.id" class="dropdown-menu" aria-labelledby="dropdownMenu2">
           <button class="dropdown-item" type="button" @click="logout">Logout</button>
@@ -18,18 +18,45 @@
         </div>
       </div>
     </nav>
-    <div class="container controls">
-      <div>
-        <img src="../assets/Add-Icont-BBW-25.png" alt="Add Vault" title="Create a Vault">
-        <h2 class="float-right text-white">Vault</h2>
+
+    <div class="container controls d-flex justify-content-center">
+      <div class="row">
+        <vault-modal />
+        <keep-modal />
+        <!-- <button class="v-create" type="button" data-toggle="modal" data-target="#createVaultModal" title="Create Vault">
+          <img src="../assets/Add-Icont-BBW-25.png" alt="Add Vault" title="Create a Vault" class="mt-1">
+          <h3 class="float-right text-white">Vault</h3>
+        </button> -->
+        <!-- <button class="v-keep ml-5" type="button" data-toggle="modal" data-target="#createKeepModal"
+          title="Create Keep">
+          <img src="../assets/Add-Icont-BBW-25.png" alt="Add Vault" title="Create a Vault" class="mt-1">
+          <h3 class="float-right text-white">Keep</h3>
+        </button> -->
       </div>
     </div>
 
+
+    <!-- <div class="container-fluid">
+      <div class="row justify-content-center">
+        <div class="card v-card" style="width: 18rem;">
+          <img src="" class="" alt="">
+          <div class="card-body">
+            <h5 class="card-title">{{vault.name}}</h5>
+            <p class="card-text">
+            </p>
+            <a href="#" class="btn btn-primary"></a>
+          </div>
+        </div>
+      </div>
+    </div> -->
 
   </div>
 </template>
 
 <script>
+  import VaultModal from "@/components/VaultModal.vue"
+  import KeepModal from "@/components/KeepModal.vue"
+
   export default {
     name: "Dashboard",
     data() {
@@ -38,6 +65,9 @@
     computed: {
       user() {
         return this.$store.state.user
+      },
+      vaults() {
+        return this.$store.state.vaults
       }
     },
     methods: {
@@ -51,9 +81,18 @@
         if (this.route != 'Home') {
           this.$router.push({ name: 'Home' });
         }
-      }
+      },
+      createVault() {
+
+      },
+      createKeep() {
+
+      },
     },
-    components: {}
+    components: {
+      VaultModal,
+      KeepModal
+    }
   }
 </script>
 
@@ -92,14 +131,14 @@
 
   .home-title {
     font-family: 'Acme', sans-serif;
-    color: white;
-    /* color: rgb(0, 174, 255); */
-    margin-right: 7rem;
+    color: rgb(0, 174, 255);
+    /* color: white; */
     text-shadow:
       -1px -1px 0 #000,
       1px -1px 0 #000,
       -1px 1px 0 #000,
       1px 1px 0 #000;
+    margin-right: 7rem;
   }
 
   .menuBtn {
