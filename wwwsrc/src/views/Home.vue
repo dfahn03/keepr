@@ -23,6 +23,7 @@
       </div>
     </nav>
 
+    <!-- TODO Make a new component with the keeps and use boostrad card-columns to make it 'Masonary' style -->
     <div class="container-fluid mt-5">
       <div class="row justify-content-center">
         <div class="card m-3" style="width: 20rem;" v-for="keep in keeps" :key="keep.id">
@@ -32,12 +33,11 @@
             <p class="card-text">{{keep.description}}</p>
             <div class="row justify-content-center">
               <div class="col-2 dropdown mr-1">
-                <img src="../assets/Add-Icon-Green-30.png" alt="" title="Add to Vault"
-                  class="btn dropdown-toggle vaultDropBtn" id="dropdownMenu2" data-toggle="dropdown"
-                  aria-haspopup="true" aria-expanded="false">
+                <img src="../assets/Add-Icon-Green-30.png" alt="" title="Add to Vault" class="btn dropdown-toggle"
+                  id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                  <button class="dropdown-item" type="button" v-if="user.id == vaults.userId" v-for="vault in vaults"
-                    :key="vault.id" @click="">{{vault.name}}</button>
+                  <button class="dropdown-item" type="button" v-if="vault.userId == user.id" v-for="vault in vaults"
+                    :key="vault.id" @click="addKeepToVault(kId, vId)">{{vault.name}}</button>
                 </div>
               </div>
               <div class="col-2">
@@ -48,10 +48,6 @@
                   title="Delete Keep" class="delKBtn ml-2" @click="deleteKeep(keep.id)">
               </div>
             </div>
-
-
-            <!-- <img src="../assets/Add-Icon-Green-30.png" alt="" title="Save Keep to Vault" class="saveKBtn" @click=""> -->
-
           </div>
         </div>
       </div>
@@ -97,6 +93,10 @@
       },
       deleteKeep(keepId) {
         this.$store.dispatch('deleteKeep', keepId);
+      },
+      addKeepToVault(kId, vId) {
+        this.$store.dispatch('addKeepToVault', kId, vId)
+        //TODO Set this up in the store
       }
     }
   };
@@ -166,7 +166,7 @@
     cursor: pointer;
   }
 
-  /* .vaultDropKBtn {
+  .dropdown {
     cursor: pointer;
-  } */
+  }
 </style>

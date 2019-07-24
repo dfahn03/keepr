@@ -1,13 +1,6 @@
 <template>
   <div class="vault-modal">
 
-    <!-- <div>
-      <button class="v-create" type="button" data-toggle="modal" data-target="#createVaultModal" title="Create Vault">
-        <img src="../assets/Add-Icont-BBW-25.png" alt="Add Vault" title="Create a Vault" class="mt-1">
-        <h3 class="float-right text-white">Vault</h3>
-      </button>
-    </div> -->
-
     <div class="modal fade" id="createVaultModal" tabindex="-1" role="dialog" aria-labelledby="createVaultModalLabel"
       aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
@@ -23,12 +16,12 @@
               <div class="form-group">
                 <label for="vaultInputName" class="col-form-label">Name:</label>
                 <input type="text" v-model="newVault.name" class="form-control text-center" id="vaultInputName"
-                  placeholder="Enter Vault Name">
+                  placeholder="Enter Vault Name" required>
               </div>
               <div class="form-group">
                 <label for="vaultInputDescription" class="col-form-label">Description:</label>
                 <input type="text" v-model="newVault.description" class="form-control text-center"
-                  id="vaultInputDescription" placeholder="Enter Vault Description"></input>
+                  id="vaultInputDescription" placeholder="Enter Vault Description">
               </div>
               <div class="modal-footer justify-content-center">
                 <button type="submit" class="btn btn-success">Create Vault</button>
@@ -72,4 +65,5 @@
 </script>
 
 <style scoped>
+
 </style>

@@ -34,12 +34,12 @@
                             <div class="form-group">
                                 <label for="registerInputEmail" class="col-form-label">Email:</label>
                                 <input type="email" v-model="newUser.email" class="form-control text-center"
-                                    id="registerInputEmail" placeholder="Enter Email"></input>
+                                    id="registerInputEmail" placeholder="Enter Email">
                             </div>
                             <div class="form-group">
                                 <label for="registerInputPassword" class="col-form-label">Password:</label>
                                 <input type="password" v-model="newUser.password" class="form-control text-center"
-                                    id="registerInputPassword" placeholder="Enter Password"></input>
+                                    id="registerInputPassword" placeholder="Enter Password">
                             </div>
                             <div class="modal-footer justify-content-center">
                                 <button type="submit" class="btn btn-success">Create Account</button>
@@ -65,12 +65,12 @@
                             <div class="form-group">
                                 <label for="loginInputEmail" class="col-form-label">Email:</label>
                                 <input type="email" v-model="creds.email" class="form-control text-center"
-                                    id="loginInputEmail" placeholder="Enter Email"></input>
+                                    id="loginInputEmail" placeholder="Enter Email">
                             </div>
                             <div class="form-group">
                                 <label for="loginInputPassword" class="col-form-label">Password:</label>
                                 <input type="password" v-model="creds.password" class="form-control text-center"
-                                    id="loginInputPassword" placeholder="Enter Password"></input>
+                                    id="loginInputPassword" placeholder="Enter Password">
                             </div>
                             <div class="modal-footer justify-content-center">
                                 <button type="submit" class="btn btn-success">Login</button>

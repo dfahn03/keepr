@@ -83,6 +83,13 @@ export default new Vuex.Store({
         console.log(res)
       } catch (err) { console.error(err) }
     },
+    async createKeep({ commit, dispatch }, newKeep) {
+      try {
+        debugger
+        await api.post('keeps', newKeep)
+        dispatch('getUserKeeps')
+      } catch (err) { console.error(err) }
+    },
     async deleteKeep({ commit, dispatch }, keepId) {
       try {
         await api.delete('keeps/' + keepId)
@@ -99,7 +106,6 @@ export default new Vuex.Store({
         commit('setVaults', res.data)
       } catch (err) { console.error(err) }
     },
-
     async createVault({ commit, dispatch }, newVault) {
       try {
         await api.post('vaults', newVault)

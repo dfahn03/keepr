@@ -32,10 +32,9 @@
           <h3 class="float-right text-white">Keep</h3>
         </button>
         <vault-modal />
-        <!-- <keep-modal /> -->
+        <keep-modal />
       </div>
     </div>
-
 
     <div class="container-fluid">
       <div class="row justify-content-center">
@@ -51,31 +50,36 @@
       </div>
     </div>
 
-    <div class="container-fluid">
+    <div class="container-fluid mt-5">
       <div class="row justify-content-center">
-        <div class="card v-card ml-3 mt-5" style="width: 15rem;" v-if="keep.userId == user.id" v-for="keep in keeps"
-          :key="keep.id">
+        <div class="card m-3" style="width: 12rem;" v-if="keep.userId == user.id" v-for="keep in keeps" :key="keep.id">
           <img :src="keep.img" class="card-img-top" alt="">
           <div class="card-body">
             <h5 class="card-title">{{keep.name}}</h5>
             <p class="card-text">{{keep.description}}</p>
-
-            <div class="col-2 dropdown mr-1">
-              <img src="../assets/Add-Icon-Green-30.png" alt="" title="Add to Vault"
-                class="btn dropdown-toggle vaultDropBtn" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false">
-              <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                <button class="dropdown-item" type="button" v-if="user.id == vaults.userId" v-for="vault in vaults"
-                  :key="vault.id" @click="">{{vault.name}}</button>
+            <div class="row justify-content-center">
+              <div class="dropdown mr-1">
+                <img src="../assets/Add-Icon-Green-30.png" alt="" title="Add to Vault" class="btn dropdown-toggle"
+                  id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                  <button class="dropdown-item" type="button" v-if="vault.userId == user.id" v-for="vault in vaults"
+                    :key="vault.id" @click="addKeepToVault(keep.id, vault.id)">{{vault.name}}</button>
+                </div>
+              </div>
+              <div>
+                <img src="../assets/Share-Icon-30.png" alt="" title="Share Keep" class="shareKBtn" @click="">
+              </div>
+              <div>
+                <img v-if="user.id == keep.userId && keep.isPrivate == true" src="../assets/Trash-Icon-26.png" alt=""
+                  title="Delete Keep" class="delKBtn ml-3" @click="deleteKeep(keep.id)">
               </div>
             </div>
-            <img v-if="keep.userId == user.id && keep.isPrivate == true" src="../assets/Trash-Icon-26.png" alt=""
-              title="Delete Keep" class="delKBtn ml-2" @click="deleteKeep(keep.id)">
           </div>
         </div>
       </div>
     </div>
 
+  </div>
   </div>
 </template>
 
@@ -124,6 +128,10 @@
       deleteKeep(keepId) {
         this.$store.dispatch('deleteKeep', keepId);
       },
+      addKeepToVault(kId, vId) {
+        this.$store.dispatch('addKeepToVault', kId, vId)
+        //TODO Set this up in the store
+      }
     },
     components: {
       VaultModal,
@@ -186,6 +194,16 @@
   }
 
   .delKBtn {
+    margin-top: 6px;
+    cursor: pointer;
+  }
+
+  .shareKBtn {
+    margin-top: 6px;
+    cursor: pointer;
+  }
+
+  .dropdown {
     cursor: pointer;
   }
 </style>
