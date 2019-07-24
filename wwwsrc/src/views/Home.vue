@@ -1,7 +1,7 @@
 <template>
   <div class="row home">
     <nav class="container-fluid navbar navbar-dark p-0 m-1">
-      <a class="navbar-brand" href="#">
+      <a class="navbar-brand" href="#" @click="pushToHome">
         <img src="../assets/K-2.jpg" width="60" height="60" class="d-inline-block align-top" alt="">
         <h4 class="float-right mt-2 ml-1 site-title">KeepSake</h4>
       </a>
@@ -40,8 +40,8 @@
                   class="btn dropdown-toggle vaultDropBtn" id="dropdownMenu2" data-toggle="dropdown"
                   aria-haspopup="true" aria-expanded="false">
                 <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                  <button class="dropdown-item" type="button" v-if="user.id == vaults.userId" v-for="vault in vaults" :key="vault.id"
-                    @click="">{{vault.name}}</button>
+                  <button class="dropdown-item" type="button" v-if="user.id == vaults.userId" v-for="vault in vaults"
+                    :key="vault.id" @click="">{{vault.name}}</button>
                 </div>
               </div>
               <div class="col-2">
@@ -91,6 +91,11 @@
       pushToLogin() {
         this.$router.push({ name: 'Login' });
       },
+      pushToHome() {
+        if (this.route != 'Home') {
+          this.$router.push({ name: 'Home' });
+        }
+      },
       pushToDashboard() {
         this.$router.push({ name: 'Dashboard' })
       },
@@ -101,15 +106,15 @@
   };
 </script>
 
-<style>
+<style scoped>
   .home {
     /* height: 100%;
     width: 100%; */
     min-width: 90vw;
-    min-height: 90vh;
+    min-height: 100vh;
     margin: 0px 0px;
     padding: 0px 0px;
-    background-image: url("../assets/home-bg-3.jpg");
+    background-image: url("../assets/home-bg-8.jpg");
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -125,12 +130,24 @@
     font-family: 'Lobster', cursive;
     font-size: 2rem;
     color: rgb(0, 174, 255);
+    /* color: white; */
+    text-shadow:
+      -1px -1px 0 #000,
+      1px -1px 0 #000,
+      -1px 1px 0 #000,
+      1px 1px 0 #000;
   }
 
   .home-title {
     font-family: 'Acme', sans-serif;
     color: rgb(0, 174, 255);
-    /* margin-left: 30rem; */
+    /* color: white; */
+    text-shadow:
+      -1px -1px 0 #000,
+      1px -1px 0 #000,
+      -1px 1px 0 #000,
+      1px 1px 0 #000;
+    margin-left: 25rem;
   }
 
   .menuBtn {

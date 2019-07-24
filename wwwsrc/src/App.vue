@@ -12,6 +12,7 @@
     text-align: center;
     color: #2c3e50;
     padding: 0px 0px;
+    user-select: none;
   }
 
   /* 
