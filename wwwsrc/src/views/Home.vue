@@ -40,7 +40,7 @@
                   class="btn dropdown-toggle vaultDropBtn" id="dropdownMenu2" data-toggle="dropdown"
                   aria-haspopup="true" aria-expanded="false">
                 <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                  <button class="dropdown-item" type="button" v-if="vault.userId == userId" v-for="vault in vaults" :key="vault.id"
+                  <button class="dropdown-item" type="button" v-if="user.id == vaults.userId" v-for="vault in vaults" :key="vault.id"
                     @click="">{{vault.name}}</button>
                 </div>
               </div>
