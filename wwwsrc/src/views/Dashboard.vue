@@ -31,9 +31,9 @@
           <img src="../assets/Add-Icont-BBW-25.png" alt="Add Vault" title="Create a Vault" class="mt-1">
           <h3 class="float-right text-white">Keep</h3>
         </button>
+        <vault-modal />
+        <!-- <keep-modal /> -->
       </div>
-      <vault-modal />
-      <keep-modal />
     </div>
 
 
