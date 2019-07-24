@@ -65,9 +65,9 @@ namespace keepr.Repositories
       return _db.QueryFirstOrDefault<Keep>(query, value);
     }
 
-    public string Delete(int id)
+    public string Delete(int id, string userId)
     {
-      string query = "DELETE FROM keeps WHERE id =@Id";
+      string query = "DELETE FROM keeps WHERE id =@Id AND userId= @UserId";
       int rowAffected = _db.Execute(query, new { id });
       if (rowAffected < 1) throw new Exception("Invalid Id");
       return "Successfully Deleted Keep";

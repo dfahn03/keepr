@@ -22,8 +22,7 @@ namespace keepr.Repositories
 
     public IEnumerable<Vault> GetVaultsByUser(string userId)
     {
-      var UserId = userId;
-      return _db.Query<Vault>("SELECT * FROM vaults WHERE userId = UserId");
+      return _db.Query<Vault>("SELECT * FROM vaults WHERE userId = @UserId");
     }
 
     public Vault GetById(int id)
@@ -60,9 +59,9 @@ namespace keepr.Repositories
       return _db.QueryFirstOrDefault<Vault>(query, value);
     }
 
-    public string Delete(int id)
+    public string Delete(int id, string userId)
     {
-      string query = "DELETE FROM vaults WHERE id =@Id";
+      string query = "DELETE FROM vaults WHERE id =@Id AND userId = @UserId";
       int rowAffected = _db.Execute(query, new { id });
       if (rowAffected < 1) throw new Exception("Invalid Id");
       return "Successfully Deleted Vault";

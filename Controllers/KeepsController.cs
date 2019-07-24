@@ -110,7 +110,8 @@ namespace keepr.Controllers
     {
       try
       {
-        return Ok(_repo.Delete(id));
+        string uid = HttpContext.User.FindFirstValue("Id");
+        return Ok(_repo.Delete(id, uid));
       }
       catch (Exception e)
       {
