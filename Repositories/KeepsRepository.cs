@@ -59,7 +59,7 @@ namespace keepr.Repositories
         views = @Views,
         shares = @Shares,
         keeps = @Keeps
-      WHERE id = @Id;
+      WHERE id = @Id AND userId = @UserId;
       SELECT * FROM keeps WHERE id = @Id;
       ";
       return _db.QueryFirstOrDefault<Keep>(query, value);

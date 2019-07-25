@@ -37,7 +37,7 @@ namespace keepr.Controllers
     //api/vaults
     [Authorize]
     [HttpGet]
-    public ActionResult<Vault> GetVaultsByUser(string userId)
+    public ActionResult<IEnumerable<Vault>> GetVaultsByUser(string userId)
     {
       try
       {

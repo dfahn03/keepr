@@ -22,7 +22,8 @@ namespace keepr.Repositories
 
     public IEnumerable<Vault> GetVaultsByUser(string userId)
     {
-      return _db.Query<Vault>("SELECT * FROM vaults WHERE userId = @UserId");
+      var UserId = userId;
+      return _db.Query<Vault>("SELECT * FROM vaults WHERE userId = UserId");
     }
 
     public Vault GetById(int id)
@@ -78,9 +79,6 @@ namespace keepr.Repositories
       int rowsAffected = _db.Execute(query, vk);
       if (rowsAffected < 1) throw new Exception("Invalid Ids");
       return "Successfully add Keep to Vault";
-      // int id = _db.ExecuteScalar<int>(query, value);
-      // value.Id = id;
-      // return value;
     }
 
     public IEnumerable<Keep> GetKeepsByVaultId(int id)

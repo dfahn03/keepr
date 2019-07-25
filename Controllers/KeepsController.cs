@@ -37,7 +37,7 @@ namespace keepr.Controllers
     //api/keeps/user
     [Authorize]
     [HttpGet("user")]
-    public ActionResult<Keep> GetKeepsByUser(string userId)
+    public ActionResult<IEnumerable<Keep>> GetKeepsByUser(string userId)
     {
       try
       {
