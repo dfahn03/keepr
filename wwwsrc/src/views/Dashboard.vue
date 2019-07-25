@@ -1,23 +1,7 @@
 <template>
-  <div class="row dashboard">
+  <div class=".card-columns dashboard">
 
-    <nav class="container-fluid navbar navbar-dark p-0 m-1">
-      <a class="navbar-brand" href="#" @click="pushToHome">
-        <img src="../assets/K-2.jpg" width="60" height="60" class="d-inline-block align-top" alt="">
-        <h4 class="float-right mt-2 ml-1 site-title">KeepSake</h4>
-      </a>
-      <h1 v-if="user.id" class="home-title mt-2">{{user.username}}'s Dashboard</h1>
-      <div class="dropdown dropleft">
-        <img src="../assets/Menu-Icon-40.png" alt="" title="Dropdown Menu" class="btn dropdown-toggle menuBtn"
-          id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <div v-if="user.id" class="dropdown-menu" aria-labelledby="dropdownMenu2">
-          <button class="dropdown-item" type="button" @click="logout">Logout</button>
-        </div>
-        <div v-else class="dropdown-menu" aria-labelledby="dropdownMenu2">
-          <button class="dropdown-item" type="button" @click="pushToLogin">Login</button>
-        </div>
-      </div>
-    </nav>
+    <navigation />
 
     <div class="container controls d-flex justify-content-center">
       <div class="row">
@@ -100,6 +84,7 @@
 <script>
   import VaultModal from "@/Components/VaultModal.vue";
   import KeepModal from "@/Components/KeepModal.vue";
+  import Navigation from "@/Components/Navigation.vue";
 
   export default {
     name: "Dashboard",
@@ -125,17 +110,6 @@
       }
     },
     methods: {
-      logout() {
-        this.$store.dispatch("logout");
-      },
-      pushToLogin() {
-        this.$router.push({ name: 'Login' });
-      },
-      pushToHome() {
-        if (this.route != 'Home') {
-          this.$router.push({ name: 'Home' });
-        }
-      },
       deleteVault(vaultId) {
         this.$store.dispatch('deleteVault', vaultId);
       },
@@ -153,7 +127,8 @@
     },
     components: {
       VaultModal,
-      KeepModal
+      KeepModal,
+      Navigation
     }
   }
 </script>

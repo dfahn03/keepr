@@ -1,6 +1,6 @@
 <template>
     <div class="row login d-flex justify-content-center align-content-center">
-        <div class="card login-card text-center" style="width: 30rem;">
+        <div class="card login-card text-center" style="width: 30rem; height: max-content;">
             <div class="card-body">
                 <h1 class="card-title">Welcome to KeepSake!</h1>
                 <h3 class="card-text">The greatest site to upload, save and see Keeps on the web!</h3>
@@ -8,97 +8,25 @@
                     data-target="#registerModal" title="Register">Register</button>
                 <button type="button" class="btn btn-dark btn-sm ml-1 mt-3 logBtn" data-toggle="modal"
                     data-target="#loginModal" title="Login">Login</button>
-                <button type="button" class="btn btn-secondary btn-sm ml-1 mt-3 guestBtn" @click="guestPreview"
+                <button type="button" class="btn btn-dark btn-sm ml-1 mt-3 guestBtn" @click="guestPreview"
                     title="Preview Site">Guest</button>
                 <!-- TODO Link to guest home view so they can view public keeps or just use one home and set restrictions if logged in or not -->
             </div>
         </div>
-
-        <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="registerModalLabel">Register</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form @submit.prevent="register">
-                            <div class="form-group">
-                                <label for="registerInputUsername" class="col-form-label">Username:</label>
-                                <input type="text" v-model="newUser.username" class="form-control text-center"
-                                    id="registerInputUsername" placeholder="Enter Username">
-                            </div>
-                            <div class="form-group">
-                                <label for="registerInputEmail" class="col-form-label">Email:</label>
-                                <input type="email" v-model="newUser.email" class="form-control text-center"
-                                    id="registerInputEmail" placeholder="Enter Email">
-                            </div>
-                            <div class="form-group">
-                                <label for="registerInputPassword" class="col-form-label">Password:</label>
-                                <input type="password" v-model="newUser.password" class="form-control text-center"
-                                    id="registerInputPassword" placeholder="Enter Password">
-                            </div>
-                            <div class="modal-footer justify-content-center">
-                                <button type="submit" class="btn btn-success">Create Account</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="loginModalLabel">Login</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form @submit.prevent="loginUser">
-                            <div class="form-group">
-                                <label for="loginInputEmail" class="col-form-label">Email:</label>
-                                <input type="email" v-model="creds.email" class="form-control text-center"
-                                    id="loginInputEmail" placeholder="Enter Email">
-                            </div>
-                            <div class="form-group">
-                                <label for="loginInputPassword" class="col-form-label">Password:</label>
-                                <input type="password" v-model="creds.password" class="form-control text-center"
-                                    id="loginInputPassword" placeholder="Enter Password">
-                            </div>
-                            <div class="modal-footer justify-content-center">
-                                <button type="submit" class="btn btn-success">Login</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+        <register-modal />
+        <login-modal />
     </div>
 </template>
 
 <script>
+    import RegisterModal from "@/Components/RegisterModal.vue"
+    import LoginModal from "@/Components/LoginModal.vue"
+
+
     export default {
         name: "Login",
         data() {
-            return {
-                creds: {
-                    email: "",
-                    password: ""
-                },
-                newUser: {
-                    email: "",
-                    password: "",
-                    username: ""
-                }
-            };
+            return {}
         },
         beforeCreate() {
             if (this.$store.state.user.id) {
@@ -106,20 +34,13 @@
             }
         },
         methods: {
-            register() {
-                this.$store.dispatch("register", this.newUser);
-                $("#registerModal").modal("hide");
-                $(".modal-backdrop").remove();
-            },
-            loginUser() {
-                this.$store.dispatch("login", this.creds);
-                $("#loginModal").modal("hide");
-                $(".modal-backdrop").remove();
-            },
             guestPreview() {
                 this.$router.push({ name: "Home" });
-                // this.$router.push("GuestHome");
             }
+        },
+        components: {
+            RegisterModal,
+            LoginModal
         }
     };
 </script>
@@ -129,14 +50,14 @@
         height: 100vh;
         width: 100vw;
         margin: 0px 0px;
-        background-image: url("../assets/bg-4.jpg");
+        background-image: url("../assets/bg-6.jpg");
         background-repeat: no-repeat;
         background-position: center;
         background-size: cover;
     }
 
     .card {
-        background: transparent;
+        background: rgba(255, 255, 255, 0.349);
         font-weight: 900;
         color: rgb(0, 0, 0);
         border: none;
@@ -163,19 +84,3 @@
         background-color: rgb(255, 153, 0);
     }
 </style>
-
-<!-- <form v-if="loginForm" @submit.prevent="loginUser">
-            <input type="email" v-model="creds.email" placeholder="email">
-            <input type="password" v-model="creds.password" placeholder="password">
-            <button type="submit">Login</button>
-        </form>
-        <form v-else @submit.prevent="register">
-            <input type="text" v-model="newUser.username" placeholder="name">
-            <input type="email" v-model="newUser.email" placeholder="email">
-            <input type="password" v-model="newUser.password" placeholder="password">
-            <button type="submit">Create Account</button>
-        </form>
-        <div @click="loginForm = !loginForm">
-            <p v-if="loginForm">No account Click to Register</p>
-            <p v-else>Already have an account click to Login</p>
-        </div> -->
