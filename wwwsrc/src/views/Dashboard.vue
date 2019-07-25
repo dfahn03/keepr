@@ -59,15 +59,22 @@
             <h5 class="card-title">{{keep.name}}</h5>
             <p class="card-text">{{keep.description}}</p>
             <div class="row justify-content-center">
-              <div class="dropdown mr-1">
-                <img src="../assets/Add-Icon-Green-30.png" alt="" title="Add to Vault" class="btn dropdown-toggle"
-                  id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                  <button class="dropdown-item" type="button" v-if="vault.userId == user.id" v-for="vault in vaults"
-                    :key="vault.id" @click="addKeepToVault(keep.id, vault.id)">{{vault.name}}</button>
+              <p class="card-text">Views: {{keep.views}}</p>
+              <p class="card-text">Shares: {{keep.shares}}</p>
+              <p class="card-text">Keeps: {{keep.keeps}}</p>
+
+            </div>
+            <div>
+              <div class="row justify-content-center">
+                <div class="dropdown mr-1">
+                  <img src="../assets/Add-Icon-Green-30.png" alt="" title="Add to Vault" class="btn dropdown-toggle"
+                    id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                    <button class="dropdown-item" type="button" v-if="vault.userId == user.id" v-for="vault in vaults"
+                      :key="vault.id" @click="addKeepToVault(keep.id, vault.id)">{{vault.name}}</button>
+                  </div>
                 </div>
-              </div>
-              <div>
+
                 <img src="../assets/Share-Icon-30.png" alt="" title="Share Keep" class="shareKBtn" @click="">
               </div>
               <div>
@@ -130,13 +137,16 @@
         this.$store.dispatch('deleteKeep', keepId);
       },
       addKeepToVault(kId, vId) {
+        debugger
         let data = {
           keepId: kId,
           vaultId: vId,
-          userId: this.user.id
+          userId: this.user.id,
         }
-        this.$store.dispatch('addKeepToVault', data)
-        //TODO Set this up in the store
+        kId[keeps] += 1
+        if (!kId in vId) {
+          this.$store.dispatch('addKeepToVault', data)
+        }
       }
     },
     components: {
