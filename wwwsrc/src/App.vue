@@ -1,17 +1,20 @@
 <template>
-  <div id="app" class="container-fluid">
+  <div id="app">
     <router-view />
   </div>
 </template>
 
 <style>
   #app {
+    max-width: 100vw;
+    max-height: 100vh;
     font-family: "Avenir", Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    /* -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale; */
     text-align: center;
-    color: #2c3e50;
-    padding: 0px 0px;
+    /* color: #2c3e50; */
+    /* padding: 0px 0px;
+    margin: 0px 0px; */
     user-select: none;
   }
 

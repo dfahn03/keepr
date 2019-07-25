@@ -1,13 +1,14 @@
 <template>
-  <div class="row container-fluid navigation m-1 p-0">
-    <nav class="container-fluid navbar navbar-dark p-0 m-1">
+  <div class="navigation justify-content-center">
+    <nav class="navbar navbar-dark p-0">
       <a class="navbar-brand" href="#" @click="pushToHome">
         <img src="../assets/K-2.jpg" width="60" height="60" class="d-inline-block align-top" alt="">
         <h4 class="float-right mt-2 ml-1 site-title">KeepSake</h4>
       </a>
       <h1 v-if="user.id" class="home-title mt-2">Welcome {{user.username}}</h1>
       <form class="form-inline my-2 my-lg-0" @submit.prevent="">
-        <input class="form-control mr-sm-2 text-center" type="search" placeholder="Search" aria-label="Search">
+        <input class="form-control mr-sm-2 text-center search-input" type="search" placeholder="Search"
+          aria-label="Search">
         <button class="btn searchBtn my-2 my-sm-0" type="submit">Search</button>
       </form>
       <div class="dropdown dropleft">
@@ -16,6 +17,7 @@
         <div v-if="user.id" class="dropdown-menu" aria-labelledby="dropdownMenu2">
           <button class="dropdown-item" type="button" @click="logout">Logout</button>
           <button class="dropdown-item" type="button" @click="pushToDashboard">Dashboard</button>
+          <button class="dropdown-item" type="button" @click="pushToHome">Home</button>
         </div>
         <div v-else class="dropdown-menu" aria-labelledby="dropdownMenu2">
           <button class="dropdown-item" type="button" @click="pushToLogin">Login</button>
@@ -79,20 +81,25 @@
       1px -1px 0 #000,
       -1px 1px 0 #000,
       1px 1px 0 #000;
-    margin-left: 25rem;
+    /* margin-left: 25rem; */
   }
 
   .menuBtn {
     cursor: pointer;
   }
 
-  /* form {
-    margin-left: 15rem;
-    justify-content: flex-end;
-  } */
+  .search-input {
+    /* margin-left: 15rem; */
+    /* justify-content: flex-end; */
+    border: 1px solid #000;
+    /* border-color: #000; */
+
+  }
 
   .searchBtn {
-    color: rgb(0, 174, 255);
-    border-color: rgb(0, 174, 255);
+    font-weight: 500;
+    color: #000;
+    background-color: rgb(0, 174, 255);
+    border-color: #000;
   }
 </style>
