@@ -80,12 +80,10 @@ export default new Vuex.Store({
       try {
         let res = await api.get('keeps/user')
         commit('setKeeps', res.data)
-        console.log(res)
       } catch (err) { console.error(err) }
     },
     async createKeep({ commit, dispatch }, newKeep) {
       try {
-        debugger
         await api.post('keeps', newKeep)
         dispatch('getUserKeeps')
       } catch (err) { console.error(err) }
@@ -102,7 +100,6 @@ export default new Vuex.Store({
     //#region -- Vaults --
     async getVaults({ commit, dispatch }) {
       try {
-        debugger
         let res = await api.get('vaults')
         commit('setVaults', res.data)
       } catch (err) { console.error(err) }

@@ -36,7 +36,7 @@
       </div>
     </div>
 
-    <div class="container-fluid">
+    <div class="container">
       <div class="row justify-content-center">
         <div class="card v-card ml-3 mt-3" style="width: 15rem;" v-if="vault.userId == user.id" v-for="vault in vaults"
           :key="vault.id">
@@ -52,7 +52,8 @@
 
     <div class="container-fluid mt-5">
       <div class="row justify-content-center">
-        <div class="card m-3" style="width: 12rem;" v-if="keep.userId == user.id" v-for="keep in keeps" :key="keep.id">
+        <div class="card m-3" style="width: 12rem; height: max-content;" v-if="keep.userId == user.id"
+          v-for="keep in keeps" :key="keep.id">
           <img :src="keep.img" class="card-img-top" alt="">
           <div class="card-body">
             <h5 class="card-title">{{keep.name}}</h5>
@@ -129,7 +130,12 @@
         this.$store.dispatch('deleteKeep', keepId);
       },
       addKeepToVault(kId, vId) {
-        this.$store.dispatch('addKeepToVault', kId, vId)
+        let data = {
+          keepId: kId,
+          vaultId: vId,
+          userId: this.user.id
+        }
+        this.$store.dispatch('addKeepToVault', data)
         //TODO Set this up in the store
       }
     },
@@ -142,8 +148,8 @@
 
 <style scoped>
   .dashboard {
-    min-width: 100vw;
-    min-height: 100vh;
+    /* min-width: 98vw;
+    min-height: 100vh; */
     margin: 0px 0px;
     padding: 0px 0px;
     background-image: url("../assets/dashboard-bg-3.jpg");
@@ -187,6 +193,10 @@
 
   .menuBtn {
     cursor: pointer;
+  }
+
+  .card {
+    border-color: #000;
   }
 
   .delVBtn {
