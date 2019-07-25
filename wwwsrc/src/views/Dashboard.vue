@@ -137,13 +137,12 @@
         this.$store.dispatch('deleteKeep', keepId);
       },
       addKeepToVault(kId, vId) {
-        debugger
         let data = {
           keepId: kId,
           vaultId: vId,
           userId: this.user.id,
         }
-        kId[keeps] += 1
+        // kId[keeps] += 1
         if (!kId in vId) {
           this.$store.dispatch('addKeepToVault', data)
         }
