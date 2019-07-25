@@ -142,10 +142,7 @@
           vaultId: vId,
           userId: this.user.id,
         }
-        // kId[keeps] += 1
-        if (!kId in vId) {
-          this.$store.dispatch('addKeepToVault', data)
-        }
+        this.$store.dispatch('addKeepToVault', data)
       }
     },
     components: {
