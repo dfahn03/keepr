@@ -52,20 +52,25 @@
 
     <div class="container-fluid mt-5">
       <div class="row justify-content-center">
-        <div class="card m-3" style="width: 12rem; height: max-content;" v-if="keep.userId == user.id"
+        <div class="card m-3" style="width: 15rem; height: max-content;" v-if="keep.userId == user.id"
           v-for="keep in keeps" :key="keep.id">
           <img :src="keep.img" class="card-img-top" alt="">
           <div class="card-body">
             <h5 class="card-title">{{keep.name}}</h5>
             <p class="card-text">{{keep.description}}</p>
-            <div class="row justify-content-center">
-              <p class="card-text">Views: {{keep.views}}</p>
-              <p class="card-text">Shares: {{keep.shares}}</p>
-              <p class="card-text">Keeps: {{keep.keeps}}</p>
-
+            <div class="row d-flex justify-content-around">
+              <div class="col-4 p-0 m-0">
+                <p class="card-text">Views: {{keep.views}}</p>
+              </div>
+              <div class="col-4 p-0 m-0">
+                <p class="card-text">Shares: {{keep.shares}}</p>
+              </div>
+              <div class="col-4 p-0 m-0">
+                <p class="card-text">Keeps: {{keep.keeps}}</p>
+              </div>
             </div>
-            <div>
-              <div class="row justify-content-center">
+            <div class="row">
+              <div class="col justify-content-center">
                 <div class="dropdown mr-1">
                   <img src="../assets/Add-Icon-Green-30.png" alt="" title="Add to Vault" class="btn dropdown-toggle"
                     id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -73,19 +78,20 @@
                     <button class="dropdown-item" type="button" v-if="vault.userId == user.id" v-for="vault in vaults"
                       :key="vault.id" @click="addKeepToVault(keep.id, vault.id)">{{vault.name}}</button>
                   </div>
+                  <img src="../assets/Share-Icon-30.png" alt="" title="Share Keep" class="shareKBtn" @click="">
+                  <img v-if="user.id == keep.userId && keep.isPrivate == true" src="../assets/Trash-Icon-26.png" alt=""
+                    title="Delete Keep" class="delKBtn ml-3" @click="deleteKeep(keep.id)">
                 </div>
+              </div>
 
-                <img src="../assets/Share-Icon-30.png" alt="" title="Share Keep" class="shareKBtn" @click="">
-              </div>
-              <div>
-                <img v-if="user.id == keep.userId && keep.isPrivate == true" src="../assets/Trash-Icon-26.png" alt=""
-                  title="Delete Keep" class="delKBtn ml-3" @click="deleteKeep(keep.id)">
-              </div>
             </div>
+
+
           </div>
         </div>
       </div>
     </div>
+  </div>
 
   </div>
   </div>
@@ -154,8 +160,10 @@
 
 <style scoped>
   .dashboard {
-    /* min-width: 98vw;
-    min-height: 100vh; */
+    height: 100%;
+    width: 100%;
+    min-width: 90vw;
+    min-height: 100vh;
     margin: 0px 0px;
     padding: 0px 0px;
     background-image: url("../assets/dashboard-bg-3.jpg");
@@ -210,12 +218,12 @@
   }
 
   .delKBtn {
-    margin-top: 6px;
+    margin-top: 3px;
     cursor: pointer;
   }
 
   .shareKBtn {
-    margin-top: 6px;
+    margin-top: 3px;
     cursor: pointer;
   }
 
