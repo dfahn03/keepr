@@ -16,7 +16,7 @@
           <div class="col-4 p-0">
             <p class="card-text">Keeps: {{keep.keeps}}</p>
           </div>
-          <!-- TODO Make these counts above more pretty -->
+          <!-- TODO Beautify these counts -->
         </div>
         <div class="dropdown mr-1">
           <img src="../assets/Add-Icon-Green-30.png" alt="" title="Add to Vault" class="btn dropdown-toggle"
