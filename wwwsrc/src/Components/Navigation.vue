@@ -1,6 +1,6 @@
 <template>
-  <div class="navigation justify-content-center">
-    <nav class="navbar navbar-dark p-0">
+  <div class="navigation col justify-content-center p-0">
+    <nav class="navbar navbar-dark p-1 fixed-top">
       <a class="navbar-brand" href="#" @click="pushToHome">
         <img src="../assets/K-2.jpg" width="60" height="60" class="d-inline-block align-top" alt="">
         <h4 class="float-right mt-2 ml-1 site-title">KeepSake</h4>
@@ -60,6 +60,10 @@
 </script>
 
 <style scoped>
+  .navbar {
+    background-color: rgba(255, 255, 255, 0.699);
+  }
+
   .site-title {
     font-family: 'Lobster', cursive;
     font-size: 2rem;

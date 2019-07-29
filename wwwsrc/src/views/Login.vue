@@ -1,5 +1,5 @@
 <template>
-    <div class="row login d-flex justify-content-center align-content-center">
+    <div class="container-fluid login d-flex justify-content-center align-items-center">
         <div class="card login-card text-center" style="width: 30rem; height: max-content;">
             <div class="card-body">
                 <h1 class="card-title">Welcome to KeepSake!</h1>
@@ -10,7 +10,6 @@
                     data-target="#loginModal" title="Login">Login</button>
                 <button type="button" class="btn btn-dark btn-sm ml-1 mt-3 guestBtn" @click="guestPreview"
                     title="Preview Site">Guest</button>
-                <!-- TODO Link to guest home view so they can view public keeps or just use one home and set restrictions if logged in or not -->
             </div>
         </div>
         <register-modal />
@@ -50,6 +49,7 @@
         height: 100vh;
         width: 100vw;
         margin: 0px 0px;
+        padding: 0px 0px;
         background-image: url("../assets/bg-6.jpg");
         background-repeat: no-repeat;
         background-position: center;

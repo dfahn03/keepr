@@ -1,6 +1,8 @@
 <template>
-  <div class="col dashboard">
-    <navigation />
+  <div class="dashboard container-fluid">
+    <div class="row">
+      <navigation />
+    </div>
 
     <div class="row controls d-flex justify-content-center align-items-center">
       <button class="btn v-create" type="button" data-toggle="modal" data-target="#createVaultModal"
@@ -20,7 +22,7 @@
     <div class="row justify-content-center align-items-center mb-5">
       <div class="card v-card ml-3 mt-3" style="width: 15rem;" v-if="vault.userId == user.id" v-for="vault in vaults"
         :key="vault.id">
-        <div class="card-body">
+        <div class="card-body" @click="openVault(vault.id)">
           <h5 class="card-title">{{vault.name}}</h5>
           <p class="card-text">{{vault.description}}</p>
           <img v-if="vault.userId == user.id" src="../assets/Trash-Icon-26.png" alt="" title="Delete Vault"
@@ -29,7 +31,7 @@
       </div>
     </div>
 
-    <dash-keeps class="row" />
+    <dash-keeps />
 
   </div>
 </template>
@@ -60,6 +62,9 @@
       deleteVault(vaultId) {
         this.$store.dispatch('deleteVault', vaultId);
       },
+      openVault(id) {
+
+      }
     },
     components: {
       VaultModal,
@@ -72,7 +77,7 @@
 
 <style scoped>
   .dashboard {
-    min-width: 90vw;
+    max-width: 100vw;
     min-height: 100vh;
     background-image: url("../assets/dashboard-bg-3.jpg");
     /* -webkit-background-size: cover;
@@ -83,6 +88,8 @@
     background-attachment: fixed;
     background-size: cover;
     background-repeat: no-repeat;
+    padding-top: 6%;
+    padding-bottom: 10%;
   }
 
   .controls {

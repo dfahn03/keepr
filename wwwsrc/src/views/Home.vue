@@ -1,7 +1,11 @@
 <template>
-  <div class="col home">
-    <navigation />
-    <h-p-keeps class="row" />
+  <div class="home container-fluid">
+    <div class="row">
+      <navigation />
+    </div>
+
+    <h-p-keeps />
+
   </div>
 </template>
 
@@ -22,7 +26,7 @@
 
 <style scoped>
   .home {
-    min-width: 90vw;
+    max-width: 100vw;
     min-height: 100vh;
     background-image: url("../assets/home-bg-13.jpg");
     /* -webkit-background-size: contain;
