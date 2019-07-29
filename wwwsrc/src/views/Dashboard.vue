@@ -63,7 +63,7 @@
         this.$store.dispatch('deleteVault', vaultId);
       },
       openVault(id) {
-
+        this.$router.push({ name: 'VaultKeep' })
       }
     },
     components: {

@@ -6,6 +6,8 @@ import Home from './views/Home.vue'
 import Login from './views/Login.vue'
 // @ts-ignore
 import Dashboard from './views/Dashboard.vue'
+// @ts-ignore
+import VaultKeep from './views/VaultKeep.vue'
 
 Vue.use(Router)
 
@@ -25,6 +27,11 @@ export default new Router({
       path: '/dashboard',
       name: 'Dashboard',
       component: Dashboard
+    },
+    {
+      path: '/vaultkeep',
+      name: 'VaultKeep',
+      component: VaultKeep
     }
   ]
 })
