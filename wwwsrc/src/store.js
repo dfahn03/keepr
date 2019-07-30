@@ -6,7 +6,7 @@ import AuthService from './AuthService'
 
 Vue.use(Vuex)
 
-let baseUrl = location.host.includes('localhost:8080') ? '//localhost:5000/' : '/'
+let baseUrl = location.host.includes('localhost') ? '//localhost:5000/' : '/'
 
 let api = Axios.create({
   baseURL: baseUrl + "api/",
