@@ -26,15 +26,3 @@ namespace keepr.Models
     public string UserId { get; set; }
   }
 }
-
-
-
-
-
-
-
-
-// id int NOT NULL AUTO_INCREMENT,
-// name VARCHAR(20) NOT NULL,
-// description VARCHAR(255) NOT NULL,
-// userId VARCHAR(255),

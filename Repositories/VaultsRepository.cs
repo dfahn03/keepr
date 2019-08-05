@@ -15,11 +15,6 @@ namespace keepr.Repositories
       _db = db;
     }
 
-    // public IEnumerable<Vault> GetAll()
-    // {
-    //   return _db.Query<Vault>("SELECT * FROM vaults");
-    // }
-
     public IEnumerable<Vault> GetVaultsByUser(string userId)
     {
       var UserId = userId;

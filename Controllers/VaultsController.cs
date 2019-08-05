@@ -19,21 +19,6 @@ namespace keepr.Controllers
       _repo = repo;
     }
 
-    // //api/vaults
-    // [Authorize]
-    // [HttpGet]
-    // public ActionResult<IEnumerable<Vault>> GetAll()
-    // {
-    //   try
-    //   {
-    //     return Ok(_repo.GetAll());
-    //   }
-    //   catch (Exception e)
-    //   {
-    //     return BadRequest(e);
-    //   }
-    // }
-
     //api/vaults
     [Authorize]
     [HttpGet]
@@ -116,9 +101,6 @@ namespace keepr.Controllers
         return BadRequest(e);
       }
     }
-
-
-
 
     //api/vaults/:id/keeps
     [Authorize]
