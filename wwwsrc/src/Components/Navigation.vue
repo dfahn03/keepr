@@ -16,8 +16,9 @@
           id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <div v-if="user.id" class="dropdown-menu" aria-labelledby="dropdownMenu2">
           <button class="dropdown-item" type="button" @click="logout">Logout</button>
-          <button class="dropdown-item" type="button" @click="pushToDashboard">Dashboard</button>
-          <button class="dropdown-item" type="button" @click="pushToHome">Home</button>
+          <button class="dropdown-item" type="button" @click="pushToDashboard"
+            v-if="$route.name != 'Dashboard'">Dashboard</button>
+          <button class="dropdown-item" type="button" @click="pushToHome" v-if="$route.name != 'Home'">Home</button>
         </div>
         <div v-else class="dropdown-menu" aria-labelledby="dropdownMenu2">
           <button class="dropdown-item" type="button" @click="pushToLogin">Login</button>
