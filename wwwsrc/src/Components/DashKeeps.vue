@@ -7,19 +7,21 @@
         <div class="card-body">
           <h5 class="card-title">{{keep.name}}</h5>
           <p class="card-text">{{keep.description}}</p>
-          <div class="row">
-            <div class="col-4 p-0">
-              <p class="card-text">Views: {{keep.views}}</p>
+          <div class="row justify-content-center align-items-center">
+            <div class="col-4 p-0 justify-content-center align-items-center">
+              <img src="../assets/eye-25.png" alt="Views" class="float-left ml-4 mt-1" title="Views">
+              <p class="card-text mb-0 mt-1">{{keep.shares}}</p>
             </div>
             <div class="col-4 p-0">
-              <p class="card-text">Shares: {{keep.shares}}</p>
+              <img src="../assets/share-25.png" alt="Views" class="float-left ml-4 mt-1" title="Shares">
+              <p class="card-text mb-0 mt-1">{{keep.shares}}</p>
             </div>
             <div class="col-4 p-0">
-              <p class="card-text">Keeps: {{keep.keeps}}</p>
+              <img src="../assets/save-25.png" alt="Views" class="float-left ml-4 mt-1" title="Keeps">
+              <p class="card-text mb-0 mt-1">{{keep.keeps}}</p>
             </div>
-            <!-- TODO Beautify these counts -->
           </div>
-          <div class="dropdown mr-1">
+          <div class="dropdown mr-1 mt-3">
             <img src="../assets/Add-Icon-Green-30.png" alt="" title="Add to Vault" class="btn dropdown-toggle"
               id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <div class="dropdown-menu" aria-labelledby="dropdownMenu2">

@@ -28,11 +28,11 @@
               <img src="../assets/save-25.png" alt="Views" class="float-left ml-4 mt-1" title="Keeps">
               <p class="card-text mb-0 mt-1">{{keep.keeps}}</p>
             </div>
-            <!-- TODO Beautify these counts -->
           </div>
           <div class="row justify-content-center mt-3">
             <img v-if="user.id == keep.userId && keep.isPrivate == true" src="../assets/Trash-Icon-26.png"
               alt="Trash Can" title="Remove Keep From Vault" class="delKBtn" @click="deleteKeepFromVault(keep.id)">
+            <!-- TODO Set this button up -->
           </div>
         </div>
       </div>
