@@ -66,6 +66,7 @@
     },
     methods: {
       deleteKeepFromVault() {
+        //TODO Set this up
       },
     },
     components: {
