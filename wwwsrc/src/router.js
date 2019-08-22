@@ -29,7 +29,7 @@ export default new Router({
       component: Dashboard
     },
     {
-      path: '/vaultkeep',
+      path: '/vaults/:vaultId',
       name: 'VaultKeep',
       component: VaultKeep
     }

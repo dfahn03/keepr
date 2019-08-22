@@ -22,10 +22,10 @@
     <div class="row justify-content-center align-items-center mb-5">
       <div class="card v-card ml-3 mt-3" style="width: 15rem;" v-if="vault.userId == user.id" v-for="vault in vaults"
         :key="vault.id">
-        <div class="card-body" @click="openVault(vault.id)">
-          <h5 class="card-title">{{vault.name}}</h5>
-          <p class="card-text">{{vault.description}}</p>
-          <img v-if="vault.userId == user.id" src="../assets/Trash-Icon-26.png" alt="" title="Delete Vault"
+        <div class="card-body">
+          <h5 class="card-title" @click="openVault(vault)">{{vault.name}}</h5>
+          <p class="card-text" @click="openVault(vault)">{{vault.description}}</p>
+          <img v-if="vault.userId == user.id" src="../assets/Trash-Icon-26.png" title="Delete Vault"
             class="delVBtn ml-2" @click="deleteVault(vault.id)">
         </div>
       </div>
@@ -62,8 +62,8 @@
       deleteVault(vaultId) {
         this.$store.dispatch('deleteVault', vaultId);
       },
-      openVault(id) {
-        this.$router.push({ name: 'VaultKeep' })
+      openVault(vault) {
+        this.$store.dispatch('setActiveVault', vault)
       }
     },
     components: {
@@ -94,5 +94,15 @@
 
   .controls {
     max-height: 10vh;
+  }
+
+  .card-title:hover,
+  .card-text:hover {
+    color: blue;
+    cursor: pointer;
+  }
+
+  .delVBtn {
+    cursor: pointer;
   }
 </style>

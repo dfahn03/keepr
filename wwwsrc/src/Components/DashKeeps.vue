@@ -24,7 +24,7 @@
               id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
               <button class="dropdown-item" type="button" v-if="vault.userId == user.id" v-for="vault in vaults"
-                :key="vault.id" @click="addKeepToVault(kId, vId)">{{vault.name}}</button>
+                :key="vault.id" @click="addKeepToVault(keep.id, vault.id)">{{vault.name}}</button>
             </div>
             <img src="../assets/Share-Icon-30.png" alt="" title="Share Keep" class="shareKBtn" @click="">
             <img v-if="user.id == keep.userId && keep.isPrivate == true" src="../assets/Trash-Icon-26.png" alt=""
@@ -45,7 +45,6 @@
     mounted() {
       this.$store.dispatch('getUserKeeps');
     },
-    props: [],
     data() {
       return {}
     },
@@ -73,7 +72,6 @@
         this.$store.dispatch('addKeepToVault', data)
       }
     },
-    components: {}
   }
 </script>
 
@@ -120,10 +118,6 @@
   }
 
   .menuBtn {
-    cursor: pointer;
-  }
-
-  .delVBtn {
     cursor: pointer;
   }
 
