@@ -10,7 +10,37 @@
       </div>
     </div>
     <div class="card-columns mt-5">
-      <div class="card" style="width: 18rem;" v-for="keep in vaultKeeps" :key="keep.id">
+      <div class="card m-0 p-0" style="width: 18rem;" v-for="keep in vaultKeeps" :key="keep.id">
+        <img :src="keep.img" class="card-img" alt="Keep Image">
+        <div class="card-body">
+          <h5 class="card-title" @click="">{{keep.name}}</h5>
+          <!-- TODO Have this open a modal with all the details of the keep -->
+          <div class="row justify-content-center align-items-center">
+            <div class="col-3 p-0 justify-content-center align-items-center">
+              <img src="../assets/eye-25.png" alt="Views" class="float-left ml-2 mt-1" title="Views">
+              <p class="card-text mb-0 mt-1">{{keep.views}}</p>
+            </div>
+            <div class="col-3 p-0">
+              <img src="../assets/share-25.png" alt="Views" class="float-left ml-2 mt-1" title="Shares">
+              <p class="card-text mb-0 mt-1">{{keep.shares}}</p>
+            </div>
+            <div class="col-3 p-0">
+              <img src="../assets/Pin-Icon-22.png" alt="Views" class="float-left ml-2 mt-1" title="Keeps">
+              <p class="card-text mb-0 mt-1">{{keep.keeps}}</p>
+            </div>
+          </div>
+          <div class="row justify-content-center mt-2">
+            <button class="btn btn-sm ml-1 btn-success"><img src="../assets/Share-Icon-12.png" class="mb-1">
+              Share</button>
+            <button class="btn btn-sm ml-1 btn-secondary" title="Remove From Vault">Remove</button>
+            <button class="btn btn-sm ml-1 btn-danger" v-if="user.id == keep.userId && keep.isPrivate == true"
+              @click="deleteKeep(keep.id)" title="Permanently Delete"><img src="../assets/Delete-Icon-12.png">
+              Delete</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="card m-0" style="width: 18rem;" v-for="keep in vaultKeeps" :key="keep.id">
         <img :src="keep.img" class="card-img-top" alt="Keep Image">
         <div class="card-body">
           <h5 class="card-title">{{keep.name}}</h5>
@@ -29,13 +59,23 @@
               <p class="card-text mb-0 mt-1">{{keep.keeps}}</p>
             </div>
           </div>
-          <div class="row justify-content-center mt-3">
-            <img v-if="user.id == keep.userId && keep.isPrivate == true" src="../assets/Trash-Icon-26.png"
-              alt="Trash Can" title="Remove Keep From Vault" class="delKBtn" @click="deleteKeepFromVault(keep.id)">
-            <!-- TODO Set this button up -->
+          <div class="row mt-3">
+            <div class="col-5 d-flex justify-content-end align-items-center"><img src="../assets/share-black-30.png"
+                alt="" title="Share Keep" class="shareKBtn" @click=""></div>
+            <div class="col-2"><img v-if="user.id == keep.userId && keep.isPrivate == true"
+                src="../assets/remove-30.png" alt="Trash Can" title="Remove Keep From Vault" class="delKBtn"
+                @click="deleteKeepFromVault(keep.id)"></div>
+            <div class="col-5 d-flex justify-content-start align-items-center">
+              <img v-if="user.id == keep.userId && keep.isPrivate == true" src="../assets/Trash-Icon-26.png" alt=""
+                title="Delete Keep" class="delKBtn ml-2" @click="deleteKeep(keep.id)">
+            </div>
+
+
+            TODO Set this button up
           </div>
         </div>
-      </div>
+      </div> -->
+
     </div>
   </div>
 </template>
@@ -118,7 +158,6 @@
   }
 
   .card-columns {
-    /* column-width: 325px; */
     columns: 5;
     column-gap: 0;
   }
@@ -126,21 +165,38 @@
   .card {
     display: inline-block;
     max-width: max-content;
-    min-height: 380px;
-    border-color: #000;
+    border: none;
+  }
+
+  .card-img {
+    opacity: 1;
+    width: 100%;
+    height: auto;
+    transition: .5s ease;
+    backface-visibility: hidden;
   }
 
   .card-body {
-    background-color: #fff;
+    transition: .5s ease;
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+    background-color: rgba(253, 253, 253, 0.418);
+    color: rgb(0, 0, 0);
+    font-size: 20px;
+    background-size: contain;
+    min-width: 17rem;
   }
 
-  .card-img-top {
-    width: 100%;
-    max-width: 300px;
-    max-height: 100%;
+  .card:hover .card-img {
+    opacity: 0.5;
   }
 
-  .delKBtn {
-    cursor: pointer;
+  .card:hover .card-body {
+    opacity: 1;
   }
 </style>

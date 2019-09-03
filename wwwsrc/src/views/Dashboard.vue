@@ -25,7 +25,7 @@
         <div class="card-body">
           <h5 class="card-title" @click="openVault(vault)">{{vault.name}}</h5>
           <p class="card-text" @click="openVault(vault)">{{vault.description}}</p>
-          <img v-if="vault.userId == user.id" src="../assets/Trash-Icon-26.png" title="Delete Vault"
+          <img v-if="vault.userId == user.id" src="../assets/Delete-Icon-25.png" title="Delete Vault"
             class="delVBtn ml-2" @click="deleteVault(vault.id)">
         </div>
       </div>

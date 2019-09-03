@@ -2,35 +2,35 @@
   <div class="container-fluid h-p-keeps">
     <div class="card-colums">
 
-      <div class="card" v-if="keep.isPrivate == false" v-for="keep in keeps" :key="keep.id">
-        <img :src="keep.img" class="card-img-top" alt="Keep Image">
+      <div class="card m-0 p-0" v-if="keep.userId == user.id" v-for="keep in keeps" :key="keep.id">
+        <img :src="keep.img" class="card-img" alt="Keep Image">
         <div class="card-body">
-          <h5 class="card-title">{{keep.name}}</h5>
-          <p class="card-text">{{keep.description}}</p>
+          <h5 class="card-title" @click="">{{keep.name}}</h5>
+          <!-- TODO Have this open a modal with all the details of the keep -->
           <div class="row justify-content-center align-items-center">
-            <div class="col-4 p-0 justify-content-center align-items-center">
-              <img src="../assets/eye-25.png" alt="Views" class="float-left ml-4 mt-1" title="Views">
+            <div class="col-3 p-0 justify-content-center align-items-center">
+              <img src="../assets/eye-25.png" alt="Views" class="float-left ml-2 mt-1" title="Views">
+              <p class="card-text mb-0 mt-1">{{keep.views}}</p>
+            </div>
+            <div class="col-3 p-0">
+              <img src="../assets/share-25.png" alt="Views" class="float-left ml-2 mt-1" title="Shares">
               <p class="card-text mb-0 mt-1">{{keep.shares}}</p>
             </div>
-            <div class="col-4 p-0">
-              <img src="../assets/share-25.png" alt="Views" class="float-left ml-4 mt-1" title="Shares">
-              <p class="card-text mb-0 mt-1">{{keep.shares}}</p>
-            </div>
-            <div class="col-4 p-0">
-              <img src="../assets/save-25.png" alt="Views" class="float-left ml-4 mt-1" title="Keeps">
+            <div class="col-3 p-0">
+              <img src="../assets/Pin-Icon-22.png" alt="Views" class="float-left ml-2 mt-1" title="Keeps">
               <p class="card-text mb-0 mt-1">{{keep.keeps}}</p>
             </div>
           </div>
-          <div class="dropdown mr-1 mt-3">
-            <img src="../assets/Add-Icon-Green-30.png" alt="" title="Add to Vault" class="btn dropdown-toggle"
-              id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <div class="dropdown mr-1 mt-2">
+            <button class="btn dropdown btn-sm ml-1 btn-primary" id="dropdownMenu2" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false"><img src="../assets/Pin-Icon-12.png" class="mb-1">
+              Save</button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
               <button class="dropdown-item" type="button" v-if="vault.userId == user.id" v-for="vault in vaults"
-                :key="vault.id" @click="addKeepToVault(kId, vId)">{{vault.name}}</button>
+                :key="vault.id" @click="addKeepToVault(keep.id, vault.id)">{{vault.name}}</button>
             </div>
-            <img src="../assets/Share-Icon-30.png" alt="" title="Share Keep" class="shareKBtn" @click="">
-            <img v-if="user.id == keep.userId && keep.isPrivate == true" src="../assets/Trash-Icon-26.png" alt=""
-              title="Delete Keep" class="delKBtn ml-2" @click="deleteKeep(keep.id)">
+            <button class="btn btn-sm ml-1 btn-success"><img src="../assets/Share-Icon-12.png" class="mb-1">
+              Share</button>
           </div>
         </div>
       </div>
@@ -97,7 +97,6 @@
   }
 
   .card-columns {
-    /* column-width: 325px; */
     columns: 5;
     column-gap: 0;
   }
@@ -105,80 +104,43 @@
   .card {
     display: inline-block;
     max-width: max-content;
-    min-height: 380px;
-    border-color: #000;
+    border: none;
+  }
+
+  .card-img {
+    opacity: 1;
+    width: 100%;
+    height: auto;
+    transition: .5s ease;
+    backface-visibility: hidden;
+    max-width: 300px;
   }
 
   .card-body {
-    background-color: #fff;
+    transition: .5s ease;
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+    background-color: rgba(253, 253, 253, 0.418);
+    color: rgb(0, 0, 0);
+    font-size: 20px;
+    background-size: contain;
+    min-width: 17rem;
   }
 
-  .card-img-top {
-    width: 100%;
-    max-width: 300px;
-    max-height: 100%;
+  .card:hover .card-img {
+    opacity: 0.5;
+  }
+
+  .card:hover .card-body {
+    opacity: 1;
   }
 
   .h-p-keeps {
     padding-top: 8%;
   }
-
-  .card {
-    display: inline-block;
-    max-width: max-content;
-    max-height: max-content;
-    border-color: #000;
-  }
-
-  .card-img-top {
-    width: 100%;
-    max-width: 300px;
-    max-height: 100%;
-  }
-
-  .shareKBtn {
-    /* margin-top: 2px; */
-    cursor: pointer;
-  }
 </style>
-
-
-/* <div class="col mt-5">
-  <div class="row justify-content-center">
-    <div class="card m-3" v-if="keep.isPrivate == false" v-for="keep in keeps" :key="keep.id">
-      <img :src="keep.img" class="card-img-top" alt="">
-      <div class="card-body">
-        <h5 class="card-title">{{keep.name}}</h5>
-        <p class="card-text">{{keep.description}}</p>
-        <div class="row d-flex justify-content-around">
-          <div class="col-4 p-0 m-0">
-            <p class="card-text">Views: {{keep.views}}</p>
-          </div>
-          <div class="col-4 p-0 m-0">
-            <p class="card-text">Shares: {{keep.shares}}</p>
-          </div>
-          <div class="col-4 p-0 m-0">
-            <p class="card-text">Keeps: {{keep.keeps}}</p>
-          </div>
-        </div>
-        <div class="row justify-content-center">
-          <div class="col-2 dropdown mr-1">
-            <img src="../assets/Add-Icon-Green-30.png" alt="" title="Add to Vault" class="btn dropdown-toggle"
-              id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-              <button class="dropdown-item" type="button" v-if="vault.userId == user.id" v-for="vault in vaults"
-                :key="vault.id" @click="addKeepToVault(kId, vId)">{{vault.name}}</button>
-            </div>
-          </div>
-          <div class="col-2">
-            <img src="../assets/Share-Icon-30.png" alt="" title="Share Keep" class="shareKBtn ml-2" @click="">
-          </div>
-          <div class="col-2">
-            <img v-if="user.id == keep.userId && keep.isPrivate == true" src="../assets/Trash-Icon-26.png" alt=""
-              title="Delete Keep" class="delKBtn ml-2" @click="deleteKeep(keep.id)">
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div> */

@@ -6,11 +6,11 @@
         <h4 class="float-right mt-2 ml-1 site-title">KeepSake</h4>
       </a>
       <h1 v-if="user.id" class="home-title mt-2">Welcome {{user.username}}</h1>
-      <form class="form-inline my-2 my-lg-0" @submit.prevent="">
+      <!-- <form class="form-inline my-2 my-lg-0" @submit.prevent="">
         <input class="form-control mr-sm-2 text-center search-input" type="search" placeholder="Search"
           aria-label="Search">
         <button class="btn searchBtn my-2 my-sm-0" type="submit">Search</button>
-      </form>
+      </form> -->
       <div class="dropdown dropleft">
         <img src="../assets/Menu-Icon-40.png" alt="" title="Dropdown Menu" class="btn dropdown-toggle menuBtn"
           id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -87,6 +87,7 @@
       -1px 1px 0 #000,
       1px 1px 0 #000;
     /* margin-left: 25rem; */
+    margin-right: 9rem;
   }
 
   .menuBtn {
