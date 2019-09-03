@@ -22,19 +22,14 @@
               <div class="form-group">
                 <h6 v-model="keep.description" class="text-center">{{keep.description}}</h6>
               </div>
-              <div class="form-check" v-if="user.id == keep.userId">
+              <div class="form-check" v-if="user.id && user.id == keep.userId">
                 <input class="form-check-input" type="radio" v-model="keep.isPrivate" name="privateRadios"
                   id="privateRadios1" v-bind:value="true" checked>
                 <label class="form-check-label" for="privateRadios1">
                   Private <small class="text-muted">(Only you can see this)</small>
                 </label>
               </div>
-              <div class="row" v-if="user.id != keep.userId && keep.isPrivate == true">
-                <div class="col mt-3 mb-3">
-                  <p>Private</p>
-                </div>
-              </div>
-              <div class="form-check mb-3" v-if="user.id == keep.userId">
+              <div class="form-check mb-3" v-if="user.id && user.id == keep.userId">
                 <input class="form-check-input" type="radio" v-model="keep.isPrivate" name="publicRadios"
                   id="publicRadios2" v-bind:value="false">
                 <label class="form-check-label" for="publicRadios2">
@@ -42,7 +37,7 @@
                 </label>
               </div>
               <div class="row" v-if="user.id != keep.userId && keep.isPrivate == false">
-                <div class="col mt-3 mb-3">
+                <div class="col mt-1 mb-1">
                   <p>Public</p>
                 </div>
               </div>
@@ -60,7 +55,7 @@
                   <p class="card-text mb-0 mt-1">{{keep.keeps}}</p>
                 </div>
               </div>
-              <div class="dropdown mr-1 mt-2 mb-3">
+              <div class="dropdown mr-1 mt-2 mb-3" v-if="user.id">
                 <button class="btn dropdown btn-sm ml-1 btn-primary" id="dropdownMenu2" data-toggle="dropdown"
                   aria-haspopup="true" aria-expanded="false"><img src="../assets/Pin-Icon-12.png" class="mb-1">
                   Save</button>
@@ -73,7 +68,7 @@
                 <button class="btn btn-sm ml-1 btn-danger" v-if="user.id == keep.userId && keep.isPrivate == true"
                   @click="deleteKeep(keep.id)"><img src="../assets/Delete-Icon-12.png"> Delete</button>
               </div>
-              <div class="modal-footer justify-content-center">
+              <div class="modal-footer justify-content-center" v-if="user.id && user.id == keep.userId">
                 <button type="submit" class="btn btn-success">Update Keep</button>
               </div>
             </form>

@@ -65,6 +65,20 @@ namespace keepr.Repositories
       return _db.QueryFirstOrDefault<Keep>(query, value);
     }
 
+    internal object UpdateKeepCounts(Keep value)
+    {
+      string query = @"
+      UPDATE keeps
+      SET
+        views = @Views,
+        shares = @Shares,
+        keeps = @Keeps
+      WHERE id = @Id;
+      SELECT * FROM keeps WHERE id = @Id;
+      ";
+      return _db.QueryFirstOrDefault<Keep>(query, value);
+    }
+
     public string Delete(int id, string userId)
     {
       string query = "DELETE FROM keeps WHERE id =@Id AND userId= @UserId";
@@ -72,5 +86,6 @@ namespace keepr.Repositories
       if (rowAffected < 1) throw new Exception("Invalid Id");
       return "Successfully Deleted Keep";
     }
+
   }
 }

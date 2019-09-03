@@ -29,6 +29,7 @@ export default new Vuex.Store({
     },
     resetState(state) {
       state.user = {}
+      state.keep = {}
     },
     setKeep(state, keep) {
       state.keep = keep
@@ -98,9 +99,9 @@ export default new Vuex.Store({
         // dispatch('getVaultKeeps')
       } catch (err) { console.error(err) }
     },
-    async updateKeep({ commit, dispatch }, keep) {
+    async updateKeepCounts({ commit, dispatch }, keep) {
       try {
-        await api.put('keeps/' + keep.id, keep)
+        await api.put('keeps/' + keep.id + '/counts', keep)
         dispatch('getUserKeeps')
         dispatch('setActiveKeep', keep)
       } catch (err) { console.error(err) }

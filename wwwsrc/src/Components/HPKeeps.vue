@@ -2,11 +2,15 @@
   <div class="h-p-keeps container-fluid ">
     <div class="card-colums">
 
-      <div class="card m-0 p-0" v-if="keep.isPrivate == false" v-for="keep in keeps"
-        :key="keep.id">
+      <keeps-detail-modal />
+
+      <!-- TODO Turn off authentication for home keeps-->
+
+      <div class="card m-0 p-0" v-if="keep.isPrivate == false" v-for="keep in keeps" :key="keep.id">
         <img :src="keep.img" class="card-img" alt="Keep Image">
         <div class="card-body">
-          <h5 class="card-title" @click="">{{keep.name}}</h5>
+          <h5 class="card-title" data-toggle="modal" data-target="#KeepsDetailModal" @click="setActiveKeep(keep)">
+            {{keep.name}}</h5>
           <div class="row justify-content-center align-items-center">
             <div class="col-3 p-0 justify-content-center align-items-center">
               <img src="../assets/eye-25.png" alt="Views" class="float-left ml-2 mt-1" title="Views">
@@ -28,7 +32,7 @@
             <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
               <button class="dropdown-item" type="button" v-if="vault.userId == user.id" v-for="vault in vaults"
                 :key="vault.id" @click="addKeepToVault(keep.id, vault.id)">{{vault.name}}</button>
-              
+              <!-- TODO setup create vault button for this menu -->
             </div>
             <button class="btn btn-sm ml-1 btn-success"><img src="../assets/Share-Icon-12.png" class="mb-1">
               Share</button>
@@ -41,6 +45,8 @@
 </template>
 
 <script>
+  import KeepsDetailModal from "@/Components/KeepsDetailModal.vue";
+
   export default {
     name: "HPKeeps",
     mounted() {
@@ -54,6 +60,9 @@
       user() {
         return this.$store.state.user;
       },
+      // keep() {
+      //   return this.$store.state.keep;
+      // },
       keeps() {
         return this.$store.state.keeps;
       },
@@ -72,9 +81,15 @@
           userId: this.user.id,
         }
         this.$store.dispatch('addKeepToVault', data)
+      },
+      setActiveKeep(keep) {
+        keep.views++
+        this.$store.dispatch('updateKeepCounts', keep)
       }
     },
-    components: {}
+    components: {
+      KeepsDetailModal
+    }
   }
 </script>
 
@@ -106,6 +121,11 @@
     display: inline-block;
     max-width: max-content;
     border: none;
+  }
+
+  .card-title:hover {
+    color: blue;
+    cursor: pointer;
   }
 
   .card-img {

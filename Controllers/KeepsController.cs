@@ -103,6 +103,24 @@ namespace keepr.Controllers
       }
     }
 
+    //api/keeps/:id/counts
+    [Authorize]
+    [HttpPut("{id}/counts")]
+    public ActionResult<Keep> UpdateKeepCounts(int id, [FromBody] Keep value)
+    {
+      try
+      {
+        // var uid = HttpContext.User.FindFirstValue("Id");
+        // value.UserId = uid;
+        value.Id = id;
+        return Ok(_repo.UpdateKeepCounts(value));
+      }
+      catch (Exception e)
+      {
+        return BadRequest(e);
+      }
+    }
+
     //api/keeps/:id
     [Authorize]
     [HttpDelete("{id}")]
