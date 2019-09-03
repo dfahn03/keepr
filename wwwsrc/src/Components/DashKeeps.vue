@@ -2,11 +2,13 @@
   <div class="dash-keeps container-fluid">
     <div class="card-columns">
 
+      <keeps-detail-modal />
+
       <div class="card m-0 p-0" v-if="keep.userId == user.id" v-for="keep in keeps" :key="keep.id">
         <img :src="keep.img" class="card-img" alt="Keep Image">
         <div class="card-body">
-          <h5 class="card-title" @click="">{{keep.name}}</h5>
-          <!-- TODO Have this open a modal with all the details of the keep -->
+          <h5 class="card-title" data-toggle="modal" data-target="#KeepsDetailModal" @click="setActiveKeep(keep)">
+            {{keep.name}}</h5>
           <div class="row justify-content-center align-items-center">
             <div class="col-3 p-0 justify-content-center align-items-center">
               <img src="../assets/eye-25.png" alt="Views" class="float-left ml-2 mt-1" title="Views">
@@ -42,6 +44,9 @@
 </template>
 
 <script>
+  import KeepsDetailModal from "@/Components/KeepsDetailModal.vue";
+
+
   export default {
     name: "DashKeeps",
     mounted() {
@@ -72,8 +77,15 @@
           userId: this.user.id,
         }
         this.$store.dispatch('addKeepToVault', data)
+      },
+      setActiveKeep(keep) {
+        keep.views++
+        this.$store.dispatch('updateKeep', keep)
       }
     },
+    components: {
+      KeepsDetailModal
+    }
   }
 </script>
 
@@ -105,15 +117,19 @@
     display: inline-block;
     max-width: max-content;
     border: none;
-    background: transparent;
   }
 
   .card-img {
     opacity: 1;
-    width: 99%;
+    width: 100%;
     height: auto;
     transition: .5s ease;
     backface-visibility: hidden;
+  }
+
+  .card-title:hover {
+    color: blue;
+    cursor: pointer;
   }
 
   .card-body {

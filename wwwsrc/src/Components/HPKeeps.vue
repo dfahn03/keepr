@@ -1,12 +1,12 @@
 <template>
-  <div class="container-fluid h-p-keeps">
+  <div class="h-p-keeps container-fluid ">
     <div class="card-colums">
 
-      <div class="card m-0 p-0" v-if="keep.userId == user.id" v-for="keep in keeps" :key="keep.id">
+      <div class="card m-0 p-0" v-if="keep.isPrivate == false" v-for="keep in keeps"
+        :key="keep.id">
         <img :src="keep.img" class="card-img" alt="Keep Image">
         <div class="card-body">
           <h5 class="card-title" @click="">{{keep.name}}</h5>
-          <!-- TODO Have this open a modal with all the details of the keep -->
           <div class="row justify-content-center align-items-center">
             <div class="col-3 p-0 justify-content-center align-items-center">
               <img src="../assets/eye-25.png" alt="Views" class="float-left ml-2 mt-1" title="Views">
@@ -28,6 +28,7 @@
             <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
               <button class="dropdown-item" type="button" v-if="vault.userId == user.id" v-for="vault in vaults"
                 :key="vault.id" @click="addKeepToVault(keep.id, vault.id)">{{vault.name}}</button>
+              
             </div>
             <button class="btn btn-sm ml-1 btn-success"><img src="../assets/Share-Icon-12.png" class="mb-1">
               Share</button>

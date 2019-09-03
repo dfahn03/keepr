@@ -5,9 +5,9 @@
                 <h1 class="card-title">Welcome to KeepSake!</h1>
                 <h3 class="card-text">The greatest site to upload, save and see Keeps on the web!</h3>
                 <button type="button" class="btn btn-dark btn-sm mt-3 regBtn" data-toggle="modal"
-                    data-target="#registerModal" title="Register">Register</button>
+                    data-target="#registerModal">Register</button>
                 <button type="button" class="btn btn-dark btn-sm ml-1 mt-3 logBtn" data-toggle="modal"
-                    data-target="#loginModal" title="Login">Login</button>
+                    data-target="#loginModal">Login</button>
                 <button type="button" class="btn btn-dark btn-sm ml-1 mt-3 guestBtn" @click="guestPreview"
                     title="Preview Site">Guest</button>
             </div>

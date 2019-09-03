@@ -5,18 +5,17 @@
     </div>
 
     <div class="row controls d-flex justify-content-center align-items-center">
-      <button class="btn v-create" type="button" data-toggle="modal" data-target="#createVaultModal"
+      <button class="btn v-keep" type="button" data-toggle="modal" data-target="#createKeepModal" title="Create Keep">
+        <img src="../assets/Add-Icont-BBW-25.png" alt="Add Vault" title="Create a Vault" class="mt-1">
+        <h3 class="float-right text-white">Keep</h3>
+      </button>
+      <button class="btn v-create ml-5" type="button" data-toggle="modal" data-target="#createVaultModal"
         title="Create Vault">
         <img src="../assets/Add-Icont-BBW-25.png" alt="Add Vault" title="Create a Vault" class="mt-1">
         <h3 class="float-right text-white">Vault</h3>
       </button>
-      <button class="btn v-keep ml-5" type="button" data-toggle="modal" data-target="#createKeepModal"
-        title="Create Keep">
-        <img src="../assets/Add-Icont-BBW-25.png" alt="Add Vault" title="Create a Vault" class="mt-1">
-        <h3 class="float-right text-white">Keep</h3>
-      </button>
-      <vault-modal />
       <keep-modal />
+      <vault-modal />
     </div>
 
     <div class="row justify-content-center align-items-center mb-5">
@@ -80,16 +79,11 @@
     max-width: 100vw;
     min-height: 100vh;
     background-image: url("../assets/dashboard-bg-3.jpg");
-    /* -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover; */
     background-size: 100% 100%;
     background-position: center;
     background-attachment: fixed;
     background-size: cover;
     background-repeat: no-repeat;
-    padding-top: 6%;
-    padding-bottom: 10%;
   }
 
   .controls {
