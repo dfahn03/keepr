@@ -97,22 +97,20 @@
   }
 
   .card-columns {
-    /* column-width: 325px; */
     columns: 5;
     column-gap: 0;
-    display: inline-block;
-    -webkit-column-break-inside: avoid;
   }
 
   .card {
     display: inline-block;
     max-width: max-content;
     border: none;
+    background: transparent;
   }
 
   .card-img {
     opacity: 1;
-    width: 100%;
+    width: 99%;
     height: auto;
     transition: .5s ease;
     backface-visibility: hidden;

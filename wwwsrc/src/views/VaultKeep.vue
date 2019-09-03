@@ -10,7 +10,7 @@
       </div>
     </div>
     <div class="card-columns mt-5">
-      <div class="card m-0 p-0" style="width: 18rem;" v-for="keep in vaultKeeps" :key="keep.id">
+      <div class="card m-0 p-0" v-for="keep in vaultKeeps" :key="keep.id">
         <img :src="keep.img" class="card-img" alt="Keep Image">
         <div class="card-body">
           <h5 class="card-title" @click="">{{keep.name}}</h5>
@@ -32,49 +32,15 @@
           <div class="row justify-content-center mt-2">
             <button class="btn btn-sm ml-1 btn-success"><img src="../assets/Share-Icon-12.png" class="mb-1">
               Share</button>
-            <button class="btn btn-sm ml-1 btn-secondary" title="Remove From Vault">Remove</button>
+            <button class="btn btn-sm ml-1 btn-secondary" title="Remove From Vault"
+              @click="deleteKeepFromVault()">Remove</button>
+            <!-- TODO Setup this button -->
             <button class="btn btn-sm ml-1 btn-danger" v-if="user.id == keep.userId && keep.isPrivate == true"
               @click="deleteKeep(keep.id)" title="Permanently Delete"><img src="../assets/Delete-Icon-12.png">
               Delete</button>
           </div>
         </div>
       </div>
-
-      <!-- <div class="card m-0" style="width: 18rem;" v-for="keep in vaultKeeps" :key="keep.id">
-        <img :src="keep.img" class="card-img-top" alt="Keep Image">
-        <div class="card-body">
-          <h5 class="card-title">{{keep.name}}</h5>
-          <p class="card-text">{{keep.description}}</p>
-          <div class="row justify-content-center align-items-center">
-            <div class="col-4 p-0 justify-content-center align-items-center">
-              <img src="../assets/eye-25.png" alt="Views" class="float-left ml-4 mt-1" title="Views">
-              <p class="card-text mb-0 mt-1">{{keep.shares}}</p>
-            </div>
-            <div class="col-4 p-0">
-              <img src="../assets/share-25.png" alt="Views" class="float-left ml-4 mt-1" title="Shares">
-              <p class="card-text mb-0 mt-1">{{keep.shares}}</p>
-            </div>
-            <div class="col-4 p-0">
-              <img src="../assets/save-25.png" alt="Views" class="float-left ml-4 mt-1" title="Keeps">
-              <p class="card-text mb-0 mt-1">{{keep.keeps}}</p>
-            </div>
-          </div>
-          <div class="row mt-3">
-            <div class="col-5 d-flex justify-content-end align-items-center"><img src="../assets/share-black-30.png"
-                alt="" title="Share Keep" class="shareKBtn" @click=""></div>
-            <div class="col-2"><img v-if="user.id == keep.userId && keep.isPrivate == true"
-                src="../assets/remove-30.png" alt="Trash Can" title="Remove Keep From Vault" class="delKBtn"
-                @click="deleteKeepFromVault(keep.id)"></div>
-            <div class="col-5 d-flex justify-content-start align-items-center">
-              <img v-if="user.id == keep.userId && keep.isPrivate == true" src="../assets/Trash-Icon-26.png" alt=""
-                title="Delete Keep" class="delKBtn ml-2" @click="deleteKeep(keep.id)">
-            </div>
-
-
-            TODO Set this button up
-          </div>
-        </div>
-      </div> -->
 
     </div>
   </div>
@@ -88,7 +54,7 @@
     props: [],
     mounted() {
       this.$store.dispatch('getVaultKeeps', this.vault)
-      this.$store.dispatch('getVaults', this.vault.id)
+      // this.$store.dispatch('getVaults', this.vault.id)
     },
     data() {
       return {}
