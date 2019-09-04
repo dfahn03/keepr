@@ -2,8 +2,6 @@
   <div class="dash-keeps container-fluid">
     <div class="card-columns">
 
-      <keeps-detail-modal />
-
       <div class="card m-0 p-0" v-if="keep.userId == user.id" v-for="keep in keeps" :key="keep.id">
         <img :src="keep.img" class="card-img" alt="Keep Image">
         <div class="card-body">
@@ -38,6 +36,7 @@
           </div>
         </div>
       </div>
+      <keeps-detail-modal />
 
     </div>
   </div>

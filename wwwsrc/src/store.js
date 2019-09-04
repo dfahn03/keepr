@@ -93,10 +93,10 @@ export default new Vuex.Store({
         dispatch('getUserKeeps')
       } catch (err) { console.error(err) }
     },
-    async addKeepToVault({ commit, dispatch }, data) {
+    async updateKeep({ commit, dispatch }, keep) {
       try {
-        await api.post('vaults/' + data.vaultId + "/keeps", data)
-        // dispatch('getVaultKeeps')
+        await api.put('keeps/' + keep.id, keep)
+        dispatch('getUserKeeps')
       } catch (err) { console.error(err) }
     },
     async updateKeepCounts({ commit, dispatch }, keep) {
@@ -125,10 +125,28 @@ export default new Vuex.Store({
         commit('setVaults', res.data)
       } catch (err) { console.error(err) }
     },
-    async getVaultKeeps({ commit, dispatch }, vault) {
+    async getVaultById({ commit, dispatch }, vaultId) {
       try {
-        let res = await api.get('vaults/' + vault.id + '/keeps')
+        let res = await api.get('vaults/' + vaultId)
+        commit('setVault', res.data)
+      } catch (err) { console.error(err) }
+    },
+    async getVaultKeeps({ commit, dispatch }, vaultId) {
+      try {
+        let res = await api.get('vaults/' + vaultId + '/keeps')
         commit('setVaultKeeps', res.data)
+      } catch (err) { console.error(err) }
+    },
+    async addKeepToVault({ commit, dispatch }, data) {
+      try {
+        await api.post('vaults/' + data.vaultId + "/keeps", data)
+        dispatch('getVaultKeeps', data.vaultId)
+      } catch (err) { console.error(err) }
+    },
+    async deleteVaultKeep({ commit, dispatch }, data) {
+      try {
+        await api.put('vaults/' + data.vaultId + "/keeps", data)
+        dispatch('getVaultKeeps', data.vaultId)
       } catch (err) { console.error(err) }
     },
     setActiveVault({ commit, dispatch }, vault) {

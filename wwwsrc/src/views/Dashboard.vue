@@ -4,7 +4,7 @@
       <navigation />
     </div>
 
-    <div class="row controls d-flex justify-content-center align-items-center">
+    <div class="row controls d-flex justify-content-center align-items-center mt-2">
       <button class="btn v-keep" type="button" data-toggle="modal" data-target="#createKeepModal" title="Create Keep">
         <img src="../assets/Add-Icont-BBW-25.png" alt="Add Vault" title="Create a Vault" class="mt-1">
         <h3 class="float-right text-white">Keep</h3>

@@ -61,7 +61,11 @@
                   Save</button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
                   <button class="dropdown-item" type="button" v-if="vault.userId == user.id" v-for="vault in vaults"
-                    :key="vault.id" @click="addKeepToVault(keep.id, vault.id)">{{vault.name}}</button>
+                    :key="vault.id" @click="addKeepToVault(keep, vault)">{{vault.name}}</button>
+                  <!-- <button class="dropdown-item" type="button" data-toggle="subModal"
+                    data-target="#createVaultModal">Create
+                    Vault</button>
+                  <vault-modal /> -->
                 </div>
                 <button class="btn btn-sm ml-1 btn-primary"><img src="../assets/Share-Icon-12.png" class="mb-1">
                   Share</button>
@@ -77,10 +81,13 @@
       </div>
     </div>
 
+
   </div>
 </template>
 
 <script>
+  // import VaultModal from "@/Components/VaultModal.vue";
+
   export default {
     name: "KeepsDetailModal",
     data() {
@@ -102,9 +109,23 @@
         this.$store.dispatch('updateKeep', keep)
         $("#KeepsDetailModal").modal("hide");
         $(".modal-backdrop").remove();
-      }
+      },
+      addKeepToVault(keep, vault) {
+        // debugger
+        let data = {
+          keepId: keep.id,
+          vaultId: vault.id,
+          userId: this.user.id,
+        }
+        this.$store.dispatch('addKeepToVault', data)
+        // keep.keeps++
+        // this.$store.dispatch('updateKeepCounts', keep)
+        // TODO Update Keeps count when saved to a vault
+      },
     },
-    components: {}
+    components: {
+      // VaultModal
+    }
   }
 </script>
 

@@ -1,10 +1,7 @@
 <template>
   <div class="h-p-keeps container-fluid ">
     <div class="card-colums">
-
-      <keeps-detail-modal />
-
-      <!-- TODO Turn off authentication for home keeps-->
+      <!-- TODO Turn off authentication for home page/keeps-->
 
       <div class="card m-0 p-0" v-if="keep.isPrivate == false" v-for="keep in keeps" :key="keep.id">
         <img :src="keep.img" class="card-img" alt="Keep Image">
@@ -27,18 +24,22 @@
           </div>
           <div class="dropdown mr-1 mt-2">
             <button class="btn dropdown btn-sm ml-1 btn-primary" id="dropdownMenu2" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false"><img src="../assets/Pin-Icon-12.png" class="mb-1">
+              aria-haspopup="true" aria-expanded="false"><img src="../assets/Pin-Icon-12.png" class="mb-1"
+                v-if="user.id">
               Save</button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+            <div class="dropdown-menu" aria-labelledby="dropdownMenu2" v-if="user.id">
               <button class="dropdown-item" type="button" v-if="vault.userId == user.id" v-for="vault in vaults"
                 :key="vault.id" @click="addKeepToVault(keep.id, vault.id)">{{vault.name}}</button>
-              <!-- TODO setup create vault button for this menu -->
+              <!-- <button class="dropdown-item" type="button" data-toggle="modal" data-target="#createVaultModal">Create
+                Vault</button> -->
             </div>
             <button class="btn btn-sm ml-1 btn-success"><img src="../assets/Share-Icon-12.png" class="mb-1">
               Share</button>
           </div>
         </div>
       </div>
+      <keeps-detail-modal />
+      <!-- <vault-modal /> -->
 
     </div>
   </div>
@@ -46,6 +47,7 @@
 
 <script>
   import KeepsDetailModal from "@/Components/KeepsDetailModal.vue";
+  // import VaultModal from "@/Components/VaultModal.vue";
 
   export default {
     name: "HPKeeps",
@@ -88,7 +90,8 @@
       }
     },
     components: {
-      KeepsDetailModal
+      KeepsDetailModal,
+      // VaultModal
     }
   }
 </script>
