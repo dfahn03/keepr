@@ -105,7 +105,8 @@
         $(".modal-backdrop").remove();
       },
       addKeepToVault(keep, vault) {
-        // debugger
+        keep.keeps++
+        this.$store.dispatch('updateKeepCounts', keep)
         let data = {
           keepId: keep.id,
           vaultId: vault.id,
@@ -114,8 +115,7 @@
         this.$store.dispatch('addKeepToVault', data)
         $("#KeepsDetailModal").modal("hide");
         $(".modal-backdrop").remove();
-        // keep.keeps++
-        // this.$store.dispatch('updateKeepCounts', keep)
+
         // TODO Update Keeps count when saved to a vault
       },
       deleteKeep(keepId) {

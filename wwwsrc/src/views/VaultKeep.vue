@@ -105,7 +105,7 @@
     background-size: cover;
     background-repeat: no-repeat;
     padding-top: 6%;
-    /* padding-bottom: 2%; */
+    padding-bottom: 2%;
   }
 
   .v-nd {
