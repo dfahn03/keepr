@@ -3,15 +3,16 @@
     <div class="row">
       <navigation />
     </div>
-
-    <h-p-keeps />
+    <div class="row">
+      <home-keeps />
+    </div>
 
   </div>
 </template>
 
 <script>
   import Navigation from "@/Components/Navigation.vue";
-  import HPKeeps from "@/Components/HPKeeps.vue";
+  import HomeKeeps from "@/Components/HomeKeeps.vue";
 
   export default {
     name: "Home",
@@ -19,7 +20,7 @@
     methods: {},
     components: {
       Navigation,
-      HPKeeps
+      HomeKeeps
     }
   };
 </script>
@@ -34,5 +35,6 @@
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+    padding-bottom: 2%;
   }
 </style>

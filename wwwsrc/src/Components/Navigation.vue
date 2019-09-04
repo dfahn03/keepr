@@ -1,11 +1,13 @@
 <template>
   <div class="navigation col justify-content-center p-0">
-    <nav class="navbar navbar-dark p-1">
+    <nav class="navbar fixed-top navbar-dark p-1">
       <a class="navbar-brand" href="#" @click="pushToHome">
         <img src="../assets/K-2.jpg" width="60" height="60" class="d-inline-block align-top" alt="">
         <h4 class="float-right mt-2 ml-1 site-title">KeepSake</h4>
       </a>
-      <h1 v-if="user.id" class="home-title mt-2">Welcome {{user.username}}</h1>
+      <h1 v-if="user.id && $route.name == 'Dashboard'" class="home-title mt-2">{{user.username}}'s Dashboard</h1>
+      <h1 v-else-if="user.id && $route.name == 'Home'" class="home-title mt-2">Public Keeps</h1>
+      <h1 v-else class="home-title mt-2">VaultKeep</h1>
       <!-- <form class="form-inline my-2 my-lg-0" @submit.prevent="">
         <input class="form-control mr-sm-2 text-center search-input" type="search" placeholder="Search"
           aria-label="Search">
@@ -63,6 +65,7 @@
 <style scoped>
   .navbar {
     background-color: rgba(255, 255, 255, 0.699);
+    max-height: 8%;
   }
 
   .site-title {

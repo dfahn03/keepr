@@ -13,8 +13,7 @@
       <div class="card m-0 p-0" v-for="keep in vaultKeeps" :key="keep.id">
         <img :src="keep.img" class="card-img" alt="Keep Image">
         <div class="card-body">
-          <h5 class="card-title" data-toggle="modal" data-target="#KeepsDetailModal" @click="setActiveKeep(keep)">
-            {{keep.name}}</h5>
+          <h5 class="card-title">{{keep.name}}</h5>
           <div class="row justify-content-center align-items-center">
             <div class="col-3 p-0 justify-content-center align-items-center">
               <img src="../assets/eye-25.png" alt="Views" class="float-left ml-2 mt-1" title="Views">
@@ -29,15 +28,13 @@
               <p class="card-text mb-0 mt-1">{{keep.keeps}}</p>
             </div>
           </div>
-          <div class="row justify-content-center mt-2">
-            <button class="btn btn-sm ml-1 btn-success"><img src="../assets/Share-Icon-12.png" class="mb-1">
-              Share</button>
-            <button class="btn btn-sm ml-1 btn-secondary" title="Remove From Vault"
-              @click="deleteKeepFromVault(keep)">Remove</button>
-            <!-- TODO Setup this button -->
-            <button class="btn btn-sm ml-1 btn-danger" v-if="user.id == keep.userId && keep.isPrivate == true"
-              @click="deleteKeep(keep.id)" title="Permanently Delete"><img src="../assets/Delete-Icon-12.png">
-              Delete</button>
+          <div class="row">
+            <div class="col mt-2">
+              <button class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#KeepsDetailModal"
+                @click="keepDetails(keep)">Details</button>
+              <button class="btn btn-sm ml-1 btn-secondary" title="Remove From Vault"
+                @click="deleteKeepFromVault(keep)">Remove</button>
+            </div>
           </div>
         </div>
       </div>
@@ -71,11 +68,13 @@
       },
       vaultKeeps() {
         return this.$store.state.vaultKeeps
+      },
+      keep() {
+        return this.$store.state.keep
       }
     },
     methods: {
       deleteKeepFromVault(keep) {
-        debugger
         let data = {
           keepId: keep.id,
           vaultId: this.vault.id,
@@ -83,8 +82,9 @@
         }
         this.$store.dispatch('deleteVaultKeep', data)
       },
-      setActiveVault() {
-
+      keepDetails(keep) {
+        keep.views++
+        this.$store.dispatch('updateKeepCounts', keep)
       }
     },
     components: {
@@ -104,8 +104,8 @@
     background-attachment: fixed;
     background-size: cover;
     background-repeat: no-repeat;
-    /* padding-top: 6%;
-    padding-bottom: 10%; */
+    padding-top: 6%;
+    /* padding-bottom: 2%; */
   }
 
   .v-nd {
@@ -119,12 +119,15 @@
   }
 
   .card-columns {
+    columns: 4;
+    column-gap: 0;
+
     @include media-breakpoint-only(sm) {
       column-count: 1;
     }
 
     @include media-breakpoint-only(md) {
-      column-count: 3;
+      column-count: 2;
     }
 
     @include media-breakpoint-only(lg) {
@@ -136,14 +139,9 @@
     }
   }
 
-  .card-columns {
-    columns: 5;
-    column-gap: 0;
-  }
-
   .card {
     display: inline-block;
-    max-width: max-content;
+    /* max-width: max-content; */
     border: none;
   }
 

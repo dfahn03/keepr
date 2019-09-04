@@ -1,5 +1,5 @@
 <template>
-  <div class="keep-modal">
+  <div class="create-keep-modal">
 
     <div class="modal fade" id="createKeepModal" tabindex="-1" role="dialog" aria-labelledby="createKeepModalLabel"
       aria-hidden="true">
@@ -60,7 +60,7 @@
 
 <script>
   export default {
-    name: "KeepModal",
+    name: "CreateKeepModal",
     props: [],
     data() {
       return {
@@ -70,7 +70,6 @@
           img: "",
           isPrivate: ""
         },
-        // picked: this.picked
       }
     },
     computed: {},

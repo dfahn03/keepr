@@ -1,5 +1,5 @@
 <template>
-  <div class="vault-modal">
+  <div class="create-vault-modal">
 
     <div class="modal fade" id="createVaultModal" tabindex="-1" role="dialog" aria-labelledby="createVaultModalLabel"
       aria-hidden="true">
@@ -38,7 +38,7 @@
 
 <script>
   export default {
-    name: "VaultModal",
+    name: "CreateVaultModal",
     props: [],
     data() {
       return {

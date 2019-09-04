@@ -4,7 +4,7 @@
       <navigation />
     </div>
 
-    <div class="row controls d-flex justify-content-center align-items-center mt-2">
+    <div class="row controls d-flex justify-content-center align-items-center">
       <button class="btn v-keep" type="button" data-toggle="modal" data-target="#createKeepModal" title="Create Keep">
         <img src="../assets/Add-Icont-BBW-25.png" alt="Add Vault" title="Create a Vault" class="mt-1">
         <h3 class="float-right text-white">Keep</h3>
@@ -14,8 +14,8 @@
         <img src="../assets/Add-Icont-BBW-25.png" alt="Add Vault" title="Create a Vault" class="mt-1">
         <h3 class="float-right text-white">Vault</h3>
       </button>
-      <keep-modal />
-      <vault-modal />
+      <create-keep-modal />
+      <create-vault-modal />
     </div>
 
     <div class="row justify-content-center align-items-center mb-5">
@@ -29,16 +29,17 @@
         </div>
       </div>
     </div>
-
-    <dash-keeps />
+    <div class="row">
+      <dash-keeps />
+    </div>
 
   </div>
 </template>
 
 <script>
-  import VaultModal from "@/Components/VaultModal.vue";
-  import KeepModal from "@/Components/KeepModal.vue";
   import Navigation from "@/Components/Navigation.vue";
+  import CreateKeepModal from "@/Components/CreateKeepModal.vue";
+  import CreateVaultModal from "@/Components/CreateVaultModal.vue";
   import DashKeeps from "@/Components/DashKeeps.vue";
 
   export default {
@@ -66,9 +67,9 @@
       }
     },
     components: {
-      VaultModal,
-      KeepModal,
       Navigation,
+      CreateKeepModal,
+      CreateVaultModal,
       DashKeeps
     }
   }
@@ -84,9 +85,11 @@
     background-attachment: fixed;
     background-size: cover;
     background-repeat: no-repeat;
+    padding-bottom: 2%;
   }
 
   .controls {
+    margin-top: 5%;
     max-height: 10vh;
   }
 

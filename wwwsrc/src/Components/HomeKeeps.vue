@@ -1,13 +1,11 @@
 <template>
-  <div class="h-p-keeps container-fluid ">
-    <div class="card-colums">
+  <div class="home-keeps container-fluid">
+    <div class="card-columns">
       <!-- TODO Turn off authentication for home page/keeps-->
-
       <div class="card m-0 p-0" v-if="keep.isPrivate == false" v-for="keep in keeps" :key="keep.id">
         <img :src="keep.img" class="card-img" alt="Keep Image">
         <div class="card-body">
-          <h5 class="card-title" data-toggle="modal" data-target="#KeepsDetailModal" @click="setActiveKeep(keep)">
-            {{keep.name}}</h5>
+          <h5 class="card-title">{{keep.name}}</h5>
           <div class="row justify-content-center align-items-center">
             <div class="col-3 p-0 justify-content-center align-items-center">
               <img src="../assets/eye-25.png" alt="Views" class="float-left ml-2 mt-1" title="Views">
@@ -22,24 +20,15 @@
               <p class="card-text mb-0 mt-1">{{keep.keeps}}</p>
             </div>
           </div>
-          <div class="dropdown mr-1 mt-2">
-            <button class="btn dropdown btn-sm ml-1 btn-primary" id="dropdownMenu2" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false"><img src="../assets/Pin-Icon-12.png" class="mb-1"
-                v-if="user.id">
-              Save</button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenu2" v-if="user.id">
-              <button class="dropdown-item" type="button" v-if="vault.userId == user.id" v-for="vault in vaults"
-                :key="vault.id" @click="addKeepToVault(keep.id, vault.id)">{{vault.name}}</button>
-              <!-- <button class="dropdown-item" type="button" data-toggle="modal" data-target="#createVaultModal">Create
-                Vault</button> -->
+          <div class="row">
+            <div class="col mt-2">
+              <button class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#KeepsDetailModal"
+                @click="keepDetails(keep)">Details</button>
             </div>
-            <button class="btn btn-sm ml-1 btn-success"><img src="../assets/Share-Icon-12.png" class="mb-1">
-              Share</button>
           </div>
         </div>
       </div>
       <keeps-detail-modal />
-      <!-- <vault-modal /> -->
 
     </div>
   </div>
@@ -47,57 +36,42 @@
 
 <script>
   import KeepsDetailModal from "@/Components/KeepsDetailModal.vue";
-  // import VaultModal from "@/Components/VaultModal.vue";
+
 
   export default {
-    name: "HPKeeps",
+    name: "HomeKeeps",
     mounted() {
       this.$store.dispatch('getPublicKeeps');
     },
-    props: [],
     data() {
       return {}
     },
     computed: {
       user() {
-        return this.$store.state.user;
+        return this.$store.state.user
       },
-      // keep() {
-      //   return this.$store.state.keep;
-      // },
       keeps() {
-        return this.$store.state.keeps;
+        return this.$store.state.keeps
       },
       vaults() {
-        return this.$store.state.vaults;
+        return this.$store.state.vaults
       }
     },
     methods: {
-      deleteKeep(keepId) {
-        this.$store.dispatch('deleteKeep', keepId);
-      },
-      addKeepToVault(kId, vId) {
-        let data = {
-          keepId: kId,
-          vaultId: vId,
-          userId: this.user.id,
-        }
-        this.$store.dispatch('addKeepToVault', data)
-      },
-      setActiveKeep(keep) {
+      keepDetails(keep) {
         keep.views++
         this.$store.dispatch('updateKeepCounts', keep)
       }
     },
     components: {
-      KeepsDetailModal,
-      // VaultModal
+      KeepsDetailModal
     }
   }
 </script>
 
 <style scoped>
   .card-columns {
+
     @include media-breakpoint-only(sm) {
       column-count: 1;
     }
@@ -107,28 +81,24 @@
     }
 
     @include media-breakpoint-only(lg) {
-      column-count: 4;
+      column-count: 3;
     }
 
     @include media-breakpoint-only(xl) {
-      column-count: 5;
+      column-count: 4;
     }
   }
 
   .card-columns {
-    columns: 5;
+    columns: 4;
     column-gap: 0;
+    margin-top: 8%;
   }
 
   .card {
-    display: inline-block;
-    max-width: max-content;
+    display: block;
+    /* max-width: max-content; */
     border: none;
-  }
-
-  .card-title:hover {
-    color: blue;
-    cursor: pointer;
   }
 
   .card-img {
@@ -137,7 +107,6 @@
     height: auto;
     transition: .5s ease;
     backface-visibility: hidden;
-    max-width: 300px;
   }
 
   .card-body {
@@ -162,9 +131,5 @@
 
   .card:hover .card-body {
     opacity: 1;
-  }
-
-  .h-p-keeps {
-    padding-top: 8%;
   }
 </style>
