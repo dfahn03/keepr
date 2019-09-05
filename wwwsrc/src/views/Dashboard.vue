@@ -57,6 +57,9 @@
       vaults() {
         return this.$store.state.vaults
       },
+      vault() {
+        return this.$store.state.vault
+      }
     },
     methods: {
       deleteVault(vaultId) {
@@ -64,6 +67,8 @@
       },
       openVault(vault) {
         this.$store.dispatch('setActiveVault', vault)
+        let vaultId = vault.id
+        this.$router.push({ name: 'VaultKeep', params: { vaultId } })
       }
     },
     components: {

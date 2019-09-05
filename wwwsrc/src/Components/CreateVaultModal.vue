@@ -45,19 +45,45 @@
         newVault: {
           name: "",
           description: ""
-        }
+        },
       }
     },
-    computed: {},
+    computed: {
+      user() {
+        return this.$store.state.user
+      },
+      keep() {
+        return this.$store.state.keep
+      },
+      vault() {
+        return this.$store.state.vault
+      }
+    },
     methods: {
       createVault() {
         this.$store.dispatch('createVault', this.newVault)
+        $("#createVaultModal").modal("hide");
+        $(".modal-backdrop").remove();
         setTimeout(() => {
           this.newVault.name = ""
           this.newVault.description = ""
         }, 1000);
-        $("#createVaultModal").modal("hide");
+        setTimeout(() => {
+          this.addKeepToVault();
+        }, 1000);
+      },
+      addKeepToVault() {
+        this.keep.keeps++
+        this.$store.dispatch('updateKeepCounts', this.keep)
+        let data = {
+          keepId: this.keep.id,
+          vaultId: this.vault.id,
+          userId: this.user.id,
+        }
+        this.$store.dispatch('addKeepToVault', data)
+        $("#KeepsDetailModal").modal("hide");
         $(".modal-backdrop").remove();
+        // this.$router.push({ name: 'VaultKeep', params: { vaultId } })
       },
     },
     components: {}

@@ -151,12 +151,11 @@ export default new Vuex.Store({
     },
     setActiveVault({ commit, dispatch }, vault) {
       commit('setVault', vault)
-      let vaultId = vault.id
-      router.push({ name: 'VaultKeep', params: { vaultId } })
     },
     async createVault({ commit, dispatch }, newVault) {
       try {
-        await api.post('vaults', newVault)
+        let res = await api.post('vaults', newVault)
+        commit('setVault', res.data)
         dispatch('getVaults')
       } catch (err) { console.error(err) }
     },
