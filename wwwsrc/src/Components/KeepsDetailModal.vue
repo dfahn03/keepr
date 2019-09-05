@@ -63,8 +63,10 @@
                   <button class="dropdown-item" type="button" v-if="vault.userId == user.id" v-for="vault in vaults"
                     :key="vault.id" @click="addKeepToVault(keep, vault)">{{vault.name}}</button>
                 </div>
-                <button class="btn btn-sm ml-1 btn-primary"><img src="../assets/Share-Icon-12.png" class="mb-1">
-                  Share</button>
+                <!-- <button class="btn btn-sm ml-1 btn-primary"><img src="../assets/Share-Icon-12.png" class="mb-1">Share</button> -->
+                <a data-dismiss="modal" data-toggle="modal" href="#shareModal"><button
+                    class="btn btn-sm ml-1 btn-primary" @click='keepShares(keep)'><img src="../assets/Share-Icon-12.png"
+                      class="mb-1">Share</button></a>
                 <button class="btn btn-sm ml-1 btn-danger" v-if="user.id == keep.userId && keep.isPrivate == true"
                   @click="deleteKeep(keep.id)"><img src="../assets/Delete-Icon-12.png"> Delete</button>
               </div>
@@ -77,11 +79,14 @@
       </div>
     </div>
 
+    <share-modal />
+    <!-- @click="closeModal" -->
 
   </div>
 </template>
 
 <script>
+  import ShareModal from '@/Components/ShareModal.vue';
   export default {
     name: "KeepsDetailModal",
     data() {
@@ -99,10 +104,19 @@
       }
     },
     methods: {
-      updateKeep(keep) {
-        this.$store.dispatch('updateKeep', keep)
-        $("#KeepsDetailModal").modal("hide");
-        $(".modal-backdrop").remove();
+      // closeModal() {
+      //   $("#KeepsDetailModal").modal("hide");
+      //   $(".modal-backdrop").remove();
+      //   $('#shareModal').modal('show');
+      // },
+      // updateKeep(keep) {
+      //   this.$store.dispatch('updateKeep', keep)
+      //   $("#KeepsDetailModal").modal("hide");
+      //   $(".modal-backdrop").remove();
+      // },
+      keepShares(keep) {
+        keep.shares++
+        this.$store.dispatch('updateKeepCounts', keep)
       },
       addKeepToVault(keep, vault) {
         keep.keeps++
@@ -122,7 +136,9 @@
         this.$store.dispatch('deleteKeep', keepId);
       },
     },
-    components: {}
+    components: {
+      ShareModal
+    }
   }
 </script>
 
