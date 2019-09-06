@@ -1,5 +1,8 @@
 -- USE dakeepr;
 -- SELECT * FROM vaultkeeps vk
+-- DROP TABLE users;
+-- DELETE FROM users;
+-- SELECT * FROM keeps;
 -- CREATE TABLE users (
 --     id VARCHAR(255) NOT NULL,
 --     username VARCHAR(20) NOT NULL,
