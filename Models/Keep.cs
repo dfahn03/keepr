@@ -14,7 +14,6 @@ namespace keepr.Models
 
     public string UserId { get; set; }
 
-    // public int VaultId { get; set; }
     [Url]
     public string Img { get; set; }
 

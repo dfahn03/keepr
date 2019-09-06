@@ -65,11 +65,9 @@ export default new Vuex.Store({
     },
     async logout({ commit, dispatch }) {
       try {
-        let success = await AuthService.Logout()
-        // if (!success) { }
+        await AuthService.Logout()
         commit('resetState')
         router.push({ name: "Login" })
-        // window.location.reload()
       } catch (e) { console.warn(e.message) }
     },
     //#endregion
@@ -173,10 +171,5 @@ export default new Vuex.Store({
     },
 
     //#endregion
-
-    //#region -- Dashboard --
-
-    //#endregion
-
   }
 })
