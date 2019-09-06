@@ -41,7 +41,6 @@
 <script>
   export default {
     name: "RegisterModal",
-    props: [],
     data() {
       return {
         newUser: {
@@ -51,9 +50,6 @@
         }
       }
     },
-    computed: {
-
-    },
     methods: {
       register() {
         this.$store.dispatch("register", this.newUser);
@@ -61,6 +57,5 @@
         $(".modal-backdrop").remove();
       },
     },
-    components: {}
   }
 </script>

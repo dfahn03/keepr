@@ -1,7 +1,6 @@
 <template>
   <div class="home-keeps container-fluid">
     <div class="card-columns">
-      <!-- TODO Turn off authentication for home page/keeps-->
       <div class="card m-0 p-0" v-if="keep.isPrivate == false" v-for="keep in keeps" :key="keep.id">
         <img :src="keep.img" class="card-img" alt="Keep Image">
         <div class="card-body">
@@ -97,7 +96,6 @@
 
   .card {
     display: block;
-    /* max-width: max-content; */
     border: none;
   }
 

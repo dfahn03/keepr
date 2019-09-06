@@ -18,14 +18,12 @@
                 <input type="text" v-model="newVault.name" class="form-control text-center" id="vaultInputName"
                   placeholder="Enter Vault Name" required>
               </div>
-              <div class="form-group">
+              <div class="form-group mb-4">
                 <label for="vaultInputDescription" class="col-form-label">Description:</label>
                 <input type="text" v-model="newVault.description" class="form-control text-center"
                   id="vaultInputDescription" placeholder="Enter Vault Description">
               </div>
-              <div class="modal-footer justify-content-center">
-                <button type="submit" class="btn btn-success">Create Vault</button>
-              </div>
+              <button type="submit" class="btn btn-success">Create Vault</button>
             </form>
           </div>
         </div>
@@ -81,11 +79,7 @@
         this.$store.dispatch('addKeepToVault', data)
         $("#KeepsDetailModal").modal("hide");
         $(".modal-backdrop").remove();
-        // this.$router.push({ name: 'VaultKeep', params: { vaultId } })
       },
     },
   }
 </script>
-
-<style scoped>
-</style>

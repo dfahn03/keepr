@@ -16,8 +16,6 @@
 
   export default {
     name: "Home",
-    computed: {},
-    methods: {},
     components: {
       Navigation,
       HomeKeeps

@@ -24,13 +24,17 @@
         <div class="card-body">
           <h5 class="card-title" @click="openVault(vault)">{{vault.name}}</h5>
           <p class="card-text" @click="openVault(vault)">{{vault.description}}</p>
-          <button class="btn btn-sm ml-1 btn-secondary" v-if="user.id == vault.userId"><img
-              src="../assets/Edit-Icon-12.png" class="mr-1 editBtn">Edit</button>
-          <button class="btn btn-sm btn-secondary ml-1"><img v-if="vault.userId == user.id"
-              src="../assets/Delete-Icon-X-12.png" class="delVBtn mr-1" @click="deleteVault(vault.id)">Delete</button>
+          <button class="btn btn-sm ml-1 btn-secondary" v-if="user.id == vault.userId" data-toggle="modal"
+            data-target="#editVaultModal" @click="setActiveVault(vault)"><img src="../assets/Edit-Icon-12.png"
+              class="mr-1 editBtn">Edit</button>
+          <button class="btn btn-sm btn-secondary ml-1" @click="deleteVault(vault.id)"><img
+              v-if="vault.userId == user.id" src="../assets/Delete-Icon-X-12.png" class="delVBtn mr-1">Delete</button>
         </div>
       </div>
     </div>
+
+    <edit-vault-modal />
+
     <div class="row">
       <dash-keeps />
     </div>
@@ -42,6 +46,7 @@
   import Navigation from "@/Components/Navigation.vue";
   import CreateKeepModal from "@/Components/CreateKeepModal.vue";
   import CreateVaultModal from "@/Components/CreateVaultModal.vue";
+  import EditVaultModal from "@/Components/EditVaultModal.vue";
   import DashKeeps from "@/Components/DashKeeps.vue";
 
   export default {
@@ -71,12 +76,16 @@
         this.$store.dispatch('setActiveVault', vault)
         let vaultId = vault.id
         this.$router.push({ name: 'VaultKeep', params: { vaultId } })
+      },
+      setActiveVault(vault) {
+        this.$store.dispatch('setActiveVault', vault)
       }
     },
     components: {
       Navigation,
       CreateKeepModal,
       CreateVaultModal,
+      EditVaultModal,
       DashKeeps
     }
   }

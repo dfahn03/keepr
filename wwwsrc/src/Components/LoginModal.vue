@@ -36,7 +36,6 @@
 <script>
   export default {
     name: "LoginModal",
-    props: [],
     data() {
       return {
         creds: {
@@ -45,7 +44,6 @@
         }
       }
     },
-    computed: {},
     methods: {
       loginUser() {
         this.$store.dispatch("login", this.creds);
@@ -53,6 +51,5 @@
         $(".modal-backdrop").remove();
       },
     },
-    components: {}
   }
 </script>

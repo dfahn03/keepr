@@ -1,31 +1,29 @@
 <template>
-  <div class="create-vault-modal">
+  <div class="edit-vault-modal">
 
-    <div class="modal fade" id="createVaultModal" tabindex="-1" role="dialog" aria-labelledby="createVaultModalLabel"
+    <div class="modal fade" id="editVaultModal" tabindex="-1" role="dialog" aria-labelledby="editVaultModalLabel"
       aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="createVaultModalLabel">Create Vault</h5>
+            <h5 class="modal-title" id="editVaultModalLabel">Create Vault</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
-            <form @submit.prevent="createVault">
+            <form @submit.prevent="editVault">
               <div class="form-group">
                 <label for="vaultInputName" class="col-form-label">Name:</label>
-                <input type="text" v-model="newVault.name" class="form-control text-center" id="vaultInputName"
+                <input type="text" v-model="vault.name" class="form-control text-center" id="vaultInputName"
                   placeholder="Enter Vault Name" required>
               </div>
-              <div class="form-group">
+              <div class="form-group mb-4">
                 <label for="vaultInputDescription" class="col-form-label">Description:</label>
-                <input type="text" v-model="newVault.description" class="form-control text-center"
+                <input type="text" v-model="vault.description" class="form-control text-center"
                   id="vaultInputDescription" placeholder="Enter Vault Description">
               </div>
-              <div class="modal-footer justify-content-center">
-                <button type="submit" class="btn btn-success">Create Vault</button>
-              </div>
+              <button type="submit" class="btn btn-success">Update Vault</button>
             </form>
           </div>
         </div>
@@ -37,55 +35,21 @@
 
 <script>
   export default {
-    name: "CreateVaultModal",
+    name: "EditVaultModal",
     data() {
-      return {
-        newVault: {
-          name: "",
-          description: ""
-        },
-      }
+      return {}
     },
     computed: {
-      user() {
-        return this.$store.state.user
-      },
-      keep() {
-        return this.$store.state.keep
-      },
       vault() {
         return this.$store.state.vault
       }
     },
     methods: {
-      createVault() {
-        this.$store.dispatch('createVault', this.newVault)
-        $("#createVaultModal").modal("hide");
+      editVault() {
+        this.$store.dispatch('updateVault', this.vault)
+        $("#editVaultModal").modal("hide");
         $(".modal-backdrop").remove();
-        setTimeout(() => {
-          this.newVault.name = ""
-          this.newVault.description = ""
-        }, 1000);
-        setTimeout(() => {
-          this.addKeepToVault();
-        }, 1000);
-      },
-      addKeepToVault() {
-        this.keep.keeps++
-        this.$store.dispatch('updateKeepCounts', this.keep)
-        let data = {
-          keepId: this.keep.id,
-          vaultId: this.vault.id,
-          userId: this.user.id,
-        }
-        this.$store.dispatch('addKeepToVault', data)
-        $("#KeepsDetailModal").modal("hide");
-        $(".modal-backdrop").remove();
-        // this.$router.push({ name: 'VaultKeep', params: { vaultId } })
       },
     },
   }
 </script>
-
-<style scoped>
-</style>

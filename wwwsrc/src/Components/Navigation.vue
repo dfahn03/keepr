@@ -9,12 +9,6 @@
       <h1 v-else-if="user.id && $route.name == 'Home'" class="home-title mt-2">Public Keeps</h1>
       <h1 v-else-if="user.id && $route.name == 'VaultKeep'" class="home-title mt-2">VaultKeep</h1>
       <h1 v-else class="home-title mt-2">Welcome</h1>
-
-      <!-- <form class="form-inline my-2 my-lg-0" @submit.prevent="">
-        <input class="form-control mr-sm-2 text-center search-input" type="search" placeholder="Search"
-          aria-label="Search">
-        <button class="btn searchBtn my-2 my-sm-0" type="submit">Search</button>
-      </form> -->
       <div class="dropdown dropleft">
         <img src="../assets/Menu-Icon-40.png" alt="" title="Dropdown Menu" class="btn dropdown-toggle menuBtn"
           id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -35,7 +29,6 @@
 <script>
   export default {
     name: "Navigation",
-    props: [],
     data() {
       return {}
     },
@@ -74,7 +67,6 @@
     font-family: 'Lobster', cursive;
     font-size: 2rem;
     color: rgb(0, 174, 255);
-    /* color: white; */
     text-shadow:
       -1px -1px 0 #000,
       1px -1px 0 #000,
@@ -85,32 +77,15 @@
   .home-title {
     font-family: 'Acme', sans-serif;
     color: rgb(0, 174, 255);
-    /* color: white; */
     text-shadow:
       -1px -1px 0 #000,
       1px -1px 0 #000,
       -1px 1px 0 #000,
       1px 1px 0 #000;
-    /* margin-left: 25rem; */
     margin-right: 9rem;
   }
 
   .menuBtn {
     cursor: pointer;
-  }
-
-  .search-input {
-    /* margin-left: 15rem; */
-    /* justify-content: flex-end; */
-    border: 1px solid #000;
-    /* border-color: #000; */
-
-  }
-
-  .searchBtn {
-    font-weight: 500;
-    color: #000;
-    background-color: rgb(0, 174, 255);
-    border-color: #000;
   }
 </style>

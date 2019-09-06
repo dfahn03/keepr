@@ -8,8 +8,6 @@
                     data-target="#registerModal">Register</button>
                 <button type="button" class="btn btn-dark btn-sm ml-1 mt-3 logBtn" data-toggle="modal"
                     data-target="#loginModal">Login</button>
-                <button type="button" class="btn btn-dark btn-sm ml-1 mt-3 guestBtn" @click="guestPreview"
-                    title="Preview Site">Guest</button>
             </div>
         </div>
         <register-modal />
@@ -30,11 +28,6 @@
         beforeCreate() {
             if (this.$store.state.user.id) {
                 this.$router.push({ name: "Home" })
-            }
-        },
-        methods: {
-            guestPreview() {
-                this.$router.push({ name: "Home" });
             }
         },
         components: {
@@ -73,14 +66,10 @@
     }
 
     .logBtn {
-        background-color: rgb(25, 212, 0);
+        background-color: rgb(88, 160, 106);
     }
 
     .regBtn {
-        background-color: rgb(0, 174, 255);
-    }
-
-    .guestBtn {
-        background-color: rgb(255, 153, 0);
+        background-color: rgb(88, 160, 106);
     }
 </style>

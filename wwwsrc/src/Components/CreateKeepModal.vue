@@ -61,7 +61,6 @@
 <script>
   export default {
     name: "CreateKeepModal",
-    props: [],
     data() {
       return {
         newKeep: {
@@ -72,7 +71,6 @@
         },
       }
     },
-    computed: {},
     methods: {
       createKeep() {
         this.$store.dispatch('createKeep', this.newKeep)
@@ -86,10 +84,5 @@
         $(".modal-backdrop").remove();
       },
     },
-    components: {}
   }
 </script>
-
-<style scoped>
-
-</style>

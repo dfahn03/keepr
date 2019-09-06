@@ -109,7 +109,6 @@
   }
 
   .v-nd {
-    /* font-family: 'Lobster', cursive; */
     font-family: 'Acme', sans-serif;
     text-shadow:
       -1px -1px 0 white,
@@ -141,7 +140,6 @@
 
   .card {
     display: inline-block;
-    /* max-width: max-content; */
     border: none;
   }
 
