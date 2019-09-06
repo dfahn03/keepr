@@ -24,8 +24,10 @@
         <div class="card-body">
           <h5 class="card-title" @click="openVault(vault)">{{vault.name}}</h5>
           <p class="card-text" @click="openVault(vault)">{{vault.description}}</p>
-          <img v-if="vault.userId == user.id" src="../assets/Delete-Icon-25.png" title="Delete Vault"
-            class="delVBtn ml-2" @click="deleteVault(vault.id)">
+          <button class="btn btn-sm ml-1 btn-secondary" v-if="user.id == vault.userId"><img
+              src="../assets/Edit-Icon-12.png" class="mr-1 editBtn">Edit</button>
+          <button class="btn btn-sm btn-secondary ml-1"><img v-if="vault.userId == user.id"
+              src="../assets/Delete-Icon-X-12.png" class="delVBtn mr-1" @click="deleteVault(vault.id)">Delete</button>
         </div>
       </div>
     </div>
@@ -104,7 +106,7 @@
     cursor: pointer;
   }
 
-  .delVBtn {
-    cursor: pointer;
+  .editBtn {
+    margin-bottom: 2px;
   }
 </style>
