@@ -32,14 +32,12 @@
       </div>
     </div>
 
-
   </div>
 </template>
 
 <script>
   export default {
     name: "CreateVaultModal",
-    props: [],
     data() {
       return {
         newVault: {
@@ -86,10 +84,8 @@
         // this.$router.push({ name: 'VaultKeep', params: { vaultId } })
       },
     },
-    components: {}
   }
 </script>
 
 <style scoped>
-
 </style>

@@ -7,7 +7,9 @@
       </a>
       <h1 v-if="user.id && $route.name == 'Dashboard'" class="home-title mt-2">{{user.username}}'s Dashboard</h1>
       <h1 v-else-if="user.id && $route.name == 'Home'" class="home-title mt-2">Public Keeps</h1>
-      <h1 v-else class="home-title mt-2">VaultKeep</h1>
+      <h1 v-else-if="user.id && $route.name == 'VaultKeep'" class="home-title mt-2">VaultKeep</h1>
+      <h1 v-else class="home-title mt-2">Welcome</h1>
+
       <!-- <form class="form-inline my-2 my-lg-0" @submit.prevent="">
         <input class="form-control mr-sm-2 text-center search-input" type="search" placeholder="Search"
           aria-label="Search">

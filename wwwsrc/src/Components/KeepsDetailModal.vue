@@ -110,7 +110,7 @@
       //   this.$store.dispatch('updateKeep', keep)
       //   $("#KeepsDetailModal").modal("hide");
       //   $(".modal-backdrop").remove();
-      // TODO create way to edit vaults
+      // TODO create way to edit vaults & keeps
       // },
       keepShares(keep) {
         keep.shares++
