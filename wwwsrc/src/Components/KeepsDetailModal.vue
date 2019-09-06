@@ -62,8 +62,8 @@
                 <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
                   <button class="dropdown-item" type="button" v-if="vault.userId == user.id" v-for="vault in vaults"
                     :key="vault.id" @click="addKeepToVault(keep, vault)">{{vault.name}}</button>
-                  <a data-dismiss="modal" data-toggle="modal" href="#createVaultModal">
-                    <button class="btn btn-sm ml-1 btn-primary">Create Vault</button>
+                  <a data-dismiss="modal" data-toggle="modal" href="#createVaultModal" style="text-decoration: none">
+                    <button class="dropdown-item" type="button">Create Vault</button>
                   </a>
                 </div>
                 <a data-dismiss="modal" data-toggle="modal" href="#shareModal">
@@ -83,7 +83,6 @@
     </div>
 
     <share-modal />
-    <!-- @click="closeModal" -->
 
   </div>
 </template>
@@ -107,11 +106,6 @@
       }
     },
     methods: {
-      // closeModal() {
-      //   $("#KeepsDetailModal").modal("hide");
-      //   $(".modal-backdrop").remove();
-      //   $('#shareModal').modal('show');
-      // },
       // updateKeep(keep) {
       //   this.$store.dispatch('updateKeep', keep)
       //   $("#KeepsDetailModal").modal("hide");
@@ -145,5 +139,7 @@
 </script>
 
 <style scoped>
-
+  .dropdown-item:hover {
+    background-color: #ddd;
+  }
 </style>
