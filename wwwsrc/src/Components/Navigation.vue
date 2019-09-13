@@ -60,7 +60,6 @@
 <style scoped>
   .navbar {
     background-color: rgba(255, 255, 255, 0.699);
-    max-height: 8%;
   }
 
   .site-title {
